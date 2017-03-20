@@ -3,6 +3,7 @@ import time
         
 class XYGrid(object):
     """__init__() functions as the class constructor"""
+
     def __init__(self, idpos=None, xpos = None, ypos = None, distance = None):
         self.idpos = idpos
         self.xpos = xpos
