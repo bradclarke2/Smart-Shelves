@@ -33,6 +33,8 @@ XYGridList.append(XYGrid("0",0, 0,0.00))
 XYGridList.append(XYGrid("1",0, 1,0.00))
 XYGridList.append(XYGrid("2",0, 2,0.00))
 
+print("hello")
+
 USSensorList = []
 USSensorList.append(USSensor("Sensor1",0, 53, 52))
 USSensorList.append(USSensor("Sensor2",1, 51, 50))
