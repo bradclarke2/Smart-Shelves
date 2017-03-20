@@ -11,10 +11,10 @@ while waiter == 1:
     listData = line.split(",")    
     print("line=",listData)
     
-    print(type(float(listData[0])))
+    print(type(float(listData[0])xz vczxd))
     
     print("bool=",isinstance(listData[0], float))
-    
+    x\xzx
     if ( isinstance(listData[0], float) ):
         for XYGrid in XYGridList:
             XYGrid.distance = listData[XYGrid.idpos]
