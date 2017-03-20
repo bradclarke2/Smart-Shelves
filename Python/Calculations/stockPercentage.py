@@ -1,17 +1,19 @@
-from Main.main import XYGridList
-global sensorNumbers
+class StockPercentage:
+    percentage = 0
+    ifFull = "Looking Good!"
+    ifEmpty = "Fill me UP!"
+    count =0
+    
+#     def __init__(self, percentage):
+#         self.percentage = percentage
 
-ifFull = "Looking Good!"
-ifEmpty = "Fill me UP!"
-count =0
-
-def checkStock(XYGrid):
+def checkStock(XYGrid, XYGridList):
     count = 0
     for XYGrid in XYGridList:
         if XYGrid.distance < 20:
             count = count +1
-    shelfPercentage = (count/XYGridList.__len__())*100
-    return shelfPercentage
+    percentage = (count/XYGridList.__len__())*100
+    return percentage
 
 #def checkShelfPercentage(sensorDistance):
 #    global numberOfItems

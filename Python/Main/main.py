@@ -1,6 +1,6 @@
 import serial
 import time
-from Calculations import support
+from Calculations.stockPercentage import checkStock
         
 class XYGrid(object):
     """__init__() functions as the class constructor"""
@@ -38,4 +38,5 @@ MeasureDistance(XYGridList)
 for XYGrid in XYGridList:
     print("idpos=",XYGrid.idpos,"xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"distance=",XYGrid.distance)
     
-support.checkStock(XYGrid)
+stockLevel = checkStock(XYGrid, XYGridList)
+print(stockLevel)
