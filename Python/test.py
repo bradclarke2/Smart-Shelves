@@ -1,22 +1,31 @@
-import serial
-import time
+'''
+Most heatmap tutorials I found online use pyplot.pcolormesh with random sets of
+data from Numpy; I just needed to plot x, y, z values stored in lists--without
+all the Numpy mumbo jumbo. Here I have code to plot intensity on a 2D array, and
+I only use Numpy where I need to (pcolormesh expects Numpy arrays as inputs).
+'''
+import matplotlib.pyplot as plt
+import numpy as np
 
-ser = serial.Serial('COM9')
-time.sleep(2)
-waiter = 1
-print("waiter=",waiter)
-while waiter == 1:
-    line = str(ser.readline(),'utf-8')
-    line = line.strip("\r\n")
-    listData = line.split(",")    
-    print("line=",listData)
-    
-    print(type(float(listData[0])xz vczxd))
-    
-    print("bool=",isinstance(listData[0], float))
-    x\xzx
-    if ( isinstance(listData[0], float) ):
-        for XYGrid in XYGridList:
-            XYGrid.distance = listData[XYGrid.idpos]
-        waiter = 0
-        print("waiter=",waiter)         
+#here's our data to plot, all normal Python lists
+x = [0, 1, 2]
+y = [0, 1, 2]
+
+intensity = [
+    [5, 10, 15, 20, 25],
+    [30, 35, 40, 45, 50],
+    [55, 60, 65, 70, 75],
+    [80, 85, 90, 95, 100],
+    [105, 110, 115, 120, 125]
+]
+
+#setup the 2D grid with Numpy
+x, y = np.meshgrid(x, y)
+
+#convert intensity (list of lists) to a numpy array for plotting
+intensity = np.array(intensity)
+
+#now just plug the data into pcolormesh, it's that easy!
+plt.pcolormesh(x, y, intensity)
+plt.colorbar() #need a colorbar to show the intensity scale
+plt.show() #boom

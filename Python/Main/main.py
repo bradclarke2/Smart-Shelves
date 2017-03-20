@@ -28,11 +28,19 @@ def MeasureDistance(XYGrid):
         waiter = 0           
 
 XYGridList = []
-XYGridList.append(XYGrid(0, 6, 7,0.00))
-XYGridList.append(XYGrid(1, 6, 7,0.00))
-XYGridList.append(XYGrid(2, 6, 7,0.00)) 
+XYGridList.append(XYGrid(0, 0, 2, 0.00))
+XYGridList.append(XYGrid(1, 1, 2, 0.00))
+XYGridList.append(XYGrid(2, 2, 2, 0.00)) 
+XYGridList.append(XYGrid(3, 0, 1, 0.00))
+XYGridList.append(XYGrid(4, 1, 1, 0.00))
+XYGridList.append(XYGrid(5, 2, 1, 0.00))
+XYGridList.append(XYGrid(6, 0, 0, 0.00))
+XYGridList.append(XYGrid(7, 1, 0, 0.00))
+XYGridList.append(XYGrid(8, 2, 0, 0.00))  
 
 MeasureDistance(XYGridList)
 
 for XYGrid in XYGridList:
     print("idpos=",XYGrid.idpos,"xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"distance=",XYGrid.distance)
+    
+print( XYGridList.__len__() )
