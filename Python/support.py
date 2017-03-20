@@ -1,5 +1,3 @@
-
-
 global sensorNumbers
 
 ifFull = "Looking Good!"
