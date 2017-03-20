@@ -10,12 +10,19 @@ class USSensor(object):
         
 class XYGrid(object):
     """__init__() functions as the class constructor"""
-
+<<<<<<< HEAD
+    def __init__(self, name=None, trig_pin = None, echo_pin = None, distance = None):
+        self.name = name
+        self.trig_pin = trig_pin
+        self.echo_pin = echo_pin
+        self.measurement = distance
+=======
     def __init__(self, idpos=None, xpos = None, ypos = None, distance = None):
         self.idpos = idpos
         self.xpos = xpos
         self.ypos = ypos
         self.distance = distance
+>>>>>>> 48ba28589675122e4eb023ba1c12235499b9d04f
         
 def MeasureDistance(USidpos):
     #return 1.00
@@ -42,10 +49,16 @@ USSensorList.append(USSensor(3, 6))
 
 for XYGrid in XYGridList:
     for USSensor in USSensorList:
+<<<<<<< HEAD
+        if int(USSensor.xypos) == int(XYGrid.name):
+            print("match,xypos=",USSensor.xypos,"name=",XYGrid.name)
+            XYGrid.measurement = MeasureDistance(USSensor)
+            print("xygriddist=",XYGrid.measurement)
+=======
         if int(USSensor.idpos) == int(XYGrid.idpos):
             print("match,xypos=",USSensor.idpos,"name=",XYGrid.idpos)
             XYGrid.distance = MeasureDistance(USSensor.idpos)
             print("xygriddist=",XYGrid.distance)
-
+>>>>>>> 48ba28589675122e4eb023ba1c12235499b9d04f
         else:
             print("nomatch,xypos=",USSensor.idpos,"name=",XYGrid.idpos)
