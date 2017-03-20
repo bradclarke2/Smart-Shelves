@@ -6,7 +6,7 @@ class Person(object):
         self.name = name
         self.trig_pin = trig_pin
         self.echo_pin = echo_pin
-        self.measurement = distance
+        self.distance = distance
         
 
 # make a list of class Person(s)
@@ -18,5 +18,5 @@ personList.append(Person("Sensor3",49, 48, 0.00))
 sum = float(100) 
 for person in personList:
     sum = sum + person.trig_pin
-    print(type(person.measurement))
+    print(type(person.distance))
     print(sum)

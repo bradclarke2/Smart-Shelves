@@ -1,0 +1,17 @@
+INSTUPMain.main
+C:\Users\Bradley\Documents\Tesco\Labs\Python\Main\main.py
+INFOS:&&1|1|2|0&&2|3|2|1&&3|4|2|5&&3|6|2|5&&3|7|2|5&&3|8|2|5&&1|9|2|0&&2|3|2|9&&3|4|2|10&&3|7|2|10&&3|8|2|10&&3|11|2|10&&2|12|2|0&&3|13|2|0&&3|14|2|0
+xypos=6
+trig_pin=7
+USSensor.__init__=5
+USSensorList=14
+Main.main=2
+MeasureDistance=12
+measurement=11
+XYGridList=13
+XYGrid=9
+USSensor=1
+name=4
+XYGrid.__init__=10
+echo_pin=8
+__init__=3
