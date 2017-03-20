@@ -1,12 +1,10 @@
-import Shelf
-
 class Product (object):
     height = 0
     width = 0
     depth = 0
     weight = 0
     tpnb = ""
-    shelf = Shelf
+    shelf = ""
     
     def __init__(self,height,width, depth, weight, tpnb, shelf):
         self.height = height
