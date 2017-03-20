@@ -30,14 +30,14 @@ def MeasureDistance(USidpos):
 
 #make a list of class USSensor(s)
 XYGridList = []
+XYGridList.append(XYGrid(0, 6, 7,0.00))
 XYGridList.append(XYGrid(1, 6, 7,0.00))
-XYGridList.append(XYGrid(2, 6, 7,0.00))
-XYGridList.append(XYGrid(3, 6, 7,0.00)) 
+XYGridList.append(XYGrid(2, 6, 7,0.00)) 
 
 USSensorList = []
-USSensorList.append(USSensor(1, 6, 53, 52))
-USSensorList.append(USSensor(5, 6, 51, 50))
-USSensorList.append(USSensor(3, 6, 49, 48))
+USSensorList.append(USSensor(1, 6))
+USSensorList.append(USSensor(5, 6))
+USSensorList.append(USSensor(3, 6))
 
 for XYGrid in XYGridList:
     for USSensor in USSensorList:
