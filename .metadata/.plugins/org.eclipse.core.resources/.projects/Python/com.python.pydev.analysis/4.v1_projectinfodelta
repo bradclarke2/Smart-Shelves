@@ -1,0 +1,12 @@
+INSTUPProduct.__init__
+C:\Users\Bradley\Documents\Tesco\Labs\Python\Product\__init__.py
+INFOS:&&1|1|2|0&&3|3|2|1&&3|4|2|1&&3|5|2|1&&3|6|2|1&&3|7|2|1&&2|8|2|1&&3|3|2|2&&3|4|2|2&&3|5|2|2&&3|6|2|2&&3|7|2|2&&2|9|2|0
+depth=5
+tpnb=7
+width=4
+Product=1
+weight=6
+makeProduct=9
+Product.__init__=2
+__init__=8
+height=3
