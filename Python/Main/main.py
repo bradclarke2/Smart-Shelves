@@ -85,3 +85,10 @@ MeasureDistance(XYGridList)
 MakeHeatMap(XYGridList)
   
 averagePercentageFullSum(XYGridList)
+
+testthepythonintegration = "hello, its me from python"
+
+
+Html_file= open("filename","w")
+Html_file.write(testthepythonintegration)
+Html_file.close()
