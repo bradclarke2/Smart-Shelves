@@ -12,6 +12,7 @@ class XYGrid(object):
 
 #checkStock.checkStock(XYGrid, XYGridList)
 
+
 XYGridList = []
 XYGridList.append(XYGrid(0, 0, 0, 0.00))
 XYGridList.append(XYGrid(1, 0, 1, 0.00))
@@ -23,13 +24,21 @@ XYGridList.append(XYGrid(6, 2, 0, 0.00))
 XYGridList.append(XYGrid(7, 2, 1, 0.00))
 XYGridList.append(XYGrid(8, 2, 2, 0.00))  
 
-shelfHeight = 30
-
 measureUS.MeasureDistance(XYGridList)
 
-for XYGrid in XYGridList:
-    print(XYGrid.distance)
+shelfHeight = 30
+percentageVolumeOccupied = stockpercentages.ShelfAvgPercentageFull(shelfHeight, XYGridList)
 
-heatmap.MakeHeatMap(shelfHeight, XYGridList, "14L16E")
+shelfVolume = 21*40*17
+productVolume = 21*12.5*8
+occupiedVolume = percentageVolumeOccupied * shelfVolume
 
-stockpercentages.ShelfAvgPercentageFull(shelfHeight, XYGridList)
+volumeOfFreeSpace = shelfVolume - occupiedVolume
+
+
+print(int(volumeOfFreeSpace / productVolume), "This is how many Quaker Oats can go out")
+
+
+#heatmap.MakeHeatMap(shelfHeight, XYGridList, "14L16E")
+
+percentageVolumeOccupied = stockpercentages.ShelfAvgPercentageFull(shelfHeight, XYGridList)
