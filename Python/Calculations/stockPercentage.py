@@ -10,7 +10,7 @@ def checkStock(XYGrid, XYGridList):
     for XYGrid in XYGridList:
         if XYGrid.distance < 20:
             count = count +1
-    percentage = (count/XYGridList.__len__())*100
+    percentage = (count/XYGridList.__len__())
     return percentage
 
 def SingleEmptyFull(shelfHeight, measurementCM):
@@ -29,14 +29,15 @@ def ShelfAvgPercentageFull (shelfHeight, XYGridList):
     for XYGrid in XYGridList:
 
         sensorMeasurement = XYGrid.distance
-        percentageFull = ((shelfHeight - sensorMeasurement) /shelfHeight) * 100
+        percentageFull = ((shelfHeight - sensorMeasurement) /shelfHeight)
         print("idpos=",XYGrid.idpos,"xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"distance=",XYGrid.distance, "percentageFull",percentageFull)
          
         averagePercentageFullSum = averagePercentageFullSum + percentageFull
          
     averagePercentageFull =round((averagePercentageFullSum /9),2)
-    print("Volume = ", averagePercentageFull, " % full")
+    print("Volume = ", averagePercentageFull * 100, " % full")
          
     stockLevel = checkStock(XYGrid, XYGridList)
-    print("Surface Area = ", round(stockLevel,2), " % full")
+    print("Surface Area = ", round(stockLevel,2) * 100, " % full")
+    return averagePercentageFull
     
