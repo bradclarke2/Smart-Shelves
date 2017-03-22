@@ -68,5 +68,20 @@ XYGridList.append(XYGrid(8, 2, 2, 0.00))
 MeasureDistance(XYGridList)
 MakeHeatMap(XYGridList)
 
+averagePercentageFullSum = 0
+
+for XYGrid in XYGridList:
+    shelfHeight = 40
+    sensorMeasurement = XYGrid.distance
+    percentageFull = ((shelfHeight - sensorMeasurement) /shelfHeight) * 100
+    print("idpos=",XYGrid.idpos,"xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"distance=",XYGrid.distance, "percentageFull",percentageFull)
+    
+    averagePercentageFullSum = averagePercentageFullSum + percentageFull
+    
+averagePercentageFull = averagePercentageFullSum /9
+print("Shelf is", averagePercentageFull,"% full")
+    
+    
 stockLevel = checkStock(XYGrid, XYGridList)
 print(stockLevel)
+
