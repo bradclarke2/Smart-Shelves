@@ -45,7 +45,7 @@ MeasureDistance(XYGridList)
 averagePercentageFullSum = 0
 
 for XYGrid in XYGridList:
-    shelfHeight = 40
+    shelfHeight = 22
     sensorMeasurement = XYGrid.distance
     percentageFull = ((shelfHeight - sensorMeasurement) /shelfHeight) * 100
     print("idpos=",XYGrid.idpos,"xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"distance=",XYGrid.distance, "percentageFull",percentageFull)
