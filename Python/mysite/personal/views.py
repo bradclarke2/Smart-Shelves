@@ -1,4 +1,5 @@
 from django.shortcuts import render
+# from Main.main import testthepythonintegration
 
 # Create your views here.
 def index (request):

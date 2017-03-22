@@ -85,3 +85,5 @@ MeasureDistance(XYGridList)
 MakeHeatMap(XYGridList)
   
 averagePercentageFullSum(XYGridList)
+
+testthepythonintegration = "hello, its me from python"
