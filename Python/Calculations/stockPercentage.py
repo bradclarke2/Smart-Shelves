@@ -1,5 +1,3 @@
-shelfHeight = 30
-shelfVolume = 21*40*17
 productVolume = 21*12.5*8
 
 class StockPercentage:
@@ -25,37 +23,34 @@ def SingleEmptyFull(shelfHeight, measurementCM):
     elif (PercFull > 2/3):
         return 2   
     
-def UnitsToFill(singleshelfpos, XYGridList):
+def UnitsToFill(singleshelf, XYGridList):
+    shelfHeight = singleshelf.height
+    shelfLocation = singleshelf.location
+    print("height=", shelfHeight, "loc=", shelfLocation)
     # Work out percentage of volume filled
-    percentageVolumeOccupied = ShelfAvgVolumePercentFull(singleshelfpos, XYGridList)
+    singleshelf.volumePercentFull = ShelfAvgVolumePercentFull(shelfLocation, shelfHeight, XYGridList)
     # Convert to available space in cm^3
-    availablevolume = ShelfOccupiedVolume (percentageVolumeOccupied)
+    availablevolume = ShelfOccupiedVolume (singleshelf)
     # Calculate number of units to fill the space
-    numunitstofill = int(availablevolume / productVolume)
-    # Print
-    print(numunitstofill, " Quaker Oats can go out on ", singleshelfpos)
-    
-    return numunitstofill
+    singleshelf.unitsOfSpace = int(availablevolume / productVolume) 
+
         
  
-def ShelfAvgVolumePercentFull (singleshelfpos, XYGridList):
-    averagePercentageFullSum =0 
+def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
+    averagePercentageFullSum = 0 
     for XYGrid in XYGridList:
-        if (XYGrid.shelflocation == singleshelfpos):
+        if (XYGrid.shelflocation == shelfLocation):
             sensorMeasurement = XYGrid.distance
-            percentageFull = ((shelfHeight - sensorMeasurement) /shelfHeight)
-            print("idpos=",XYGrid.idpos,"xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"distance=",XYGrid.distance, "percentageFull",percentageFull)
-             
+            percentageFull = ((shelfHeight - sensorMeasurement) /shelfHeight)  
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
-             
+    print("avg%fullsum=", averagePercentageFullSum)
     averagePercentageFull =round((averagePercentageFullSum /9),2)
-    print("Volume = ", averagePercentageFull * 100, " % full")
-         
-    stockLevel = checkStock(XYGrid, XYGridList)
-    print("Surface Area = ", round(stockLevel,2) * 100, " % full")
     return averagePercentageFull
 
-def ShelfOccupiedVolume (percentageVolumeOccupied):
-    OccupiedVolume = percentageVolumeOccupied * shelfVolume
+def ShelfOccupiedVolume (singleShelf):
+    shelfVolume = singleShelf.height * singleShelf.width * singleShelf.depth
+    
+    OccupiedVolume = singleShelf.volumePercentFull * shelfVolume
+    print(singleShelf.location, "volume = ", shelfVolume, "volpercenfull=", singleShelf.volumePercentFull, "occupiedvolume=", OccupiedVolume)
     AvailableVolume = shelfVolume - OccupiedVolume
     return AvailableVolume

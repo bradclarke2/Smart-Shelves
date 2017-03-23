@@ -11,14 +11,8 @@ def startfunction():
     
     class Departmental_Salary(Resource):
         def get(self):
-            XYGridList = XYGridObject.MakeXYGrid()
-            ShelfList = ShelfObject.makeShelfGrid()
-            for singleshelfpos in ShelfList:
-                measureUS.MeasureDistance(singleshelfpos.location, XYGridList) 
-                a =stockpercentages.UnitsToFill(singleshelfpos.location, XYGridList)
-                print(a)
-            return a
-          
+            return 1
+         
     class location(Resource):
         def get(self):   
             return 2 

@@ -9,10 +9,24 @@ import WebPage.API as test
 XYGridList = XYGridObject.MakeXYGrid()
 ShelfList = ShelfObject.makeShelfGrid()
 
-for singleshelfpos in ShelfList:
-    print(singleshelfpos.location)
-    measureUS.MeasureDistance(singleshelfpos.location, XYGridList)    
-    stockpercentages.UnitsToFill(singleshelfpos.location, XYGridList)
-    heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos.location)
-    
+
+for singleshelf in ShelfList:
+    measureUS.MeasureDistance(singleshelf.location, XYGridList)  
+      
+      
+    stockpercentages.UnitsToFill(singleshelf, XYGridList)
+    print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
+
+    heatmap.MakeHeatMap(singleshelf.height, XYGridList, singleshelf.location)
+
+
+print("XYGrid=")
+for XYGrid in XYGridList:
+    print(XYGrid.shelflocation,",",XYGrid.idpos,",",XYGrid.xpos,",",XYGrid.ypos,",",XYGrid.distance)
+print("ShelfGrid=")
+for Shelf in ShelfList:
+     print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
+
+  
 test.startfunction()
+
