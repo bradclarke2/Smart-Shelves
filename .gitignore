@@ -1,3 +1,6 @@
 .metadata/
 Python/.metadata
 Python/mysite/personal/__pycache__
+*.pyc
+*.pyo
+eggs
