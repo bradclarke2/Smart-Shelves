@@ -3,9 +3,10 @@ int TRIG_PIN;
 int ECHO_PIN;
 // Anything over 400 cm (23200 us pulse) is "out of range"
 const unsigned int MAX_DIST = 23200;
-int numberOfSensors = 9; //change to the number of sensors being used
+int numberOfSensors = 18; //change to the number of sensors being used
 
-const int matrix [9][3] ={ //sensor,echo,trigger
+const int matrix [18][3] ={ //sensor,echo,trigger
+  // 14L8E
   {0, 8, 9},
   {1, 2, 3},
   {2, 48, 49},
@@ -15,6 +16,16 @@ const int matrix [9][3] ={ //sensor,echo,trigger
   {6, 12, 13},
   {7, 6, 7},
   {8, 52, 53},
+  // 15R2A
+  {9, 8, 9},
+  {10, 2, 3},
+  {11, 48, 49},
+  {12, 10, 11},
+  {13, 4, 5},
+  {14, 50, 51},
+  {15, 12, 13},
+  {16, 6, 7},
+  {17, 52, 53},
 };
 
 void setup() {

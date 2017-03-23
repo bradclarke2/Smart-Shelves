@@ -1,8 +1,8 @@
 import serial
 import time
 
-def MeasureDistance(XYGridList):
-    ser = serial.Serial('COM9')
+def MeasureDistance(singleshelfpos, XYGridList):
+    ser = serial.Serial('COM9', 9600)
     ser.readline()
     time.sleep(2)
     waiter = 1
@@ -15,6 +15,7 @@ def MeasureDistance(XYGridList):
         listData = [float(i) for i in listData]
         
         for XYGrid in XYGridList:
-            XYGrid.distance = listData[XYGrid.idpos]
-            print("id=",XYGrid.idpos,"dist=",XYGrid.distance)
+            if ( XYGrid.shelflocation == singleshelfpos):
+                XYGrid.distance = listData[XYGrid.idpos]
+                print("id=",XYGrid.idpos,"dist=",XYGrid.distance)
         waiter = 0
