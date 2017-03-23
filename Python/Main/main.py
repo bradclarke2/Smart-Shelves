@@ -15,4 +15,3 @@ for singleshelfpos in ShelfLocations:
     heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos)
     
 startAPI.startfunction()
-

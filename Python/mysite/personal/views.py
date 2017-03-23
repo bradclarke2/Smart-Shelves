@@ -1,9 +1,6 @@
 from django.shortcuts import render
-<<<<<<< HEAD
-# from Main.main import testthepythonintegration
-=======
 import urllib
->>>>>>> 2c3ecc462cd14ed3532f9855d6268b8385dd181a
+
 
 # Create your views here.
 def index (request):
