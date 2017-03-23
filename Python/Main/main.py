@@ -1,5 +1,4 @@
 import Calculations.stockPercentage as stockpercentages
-import Graphing.Heatmap as heatmap
 import Measurements.MeasureUS as measureUS
         
 class XYGrid(object):

@@ -1,4 +1,3 @@
-from Main.JordanAsad import shelfHeight
 class StockPercentage:
     percentage = 0
     ifFull = "Looking Good!"
