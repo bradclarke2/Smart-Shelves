@@ -1,4 +1,7 @@
-import Calculations
+import Objects.XYGrid as XYGridObject
+import Objects.shelf as ShelfObject
+import Calculations.stockPercentage as stockpercentages
+import Measurements.MeasureUS as measureUS
 
 def startfunction():
     from flask import Flask
@@ -8,14 +11,16 @@ def startfunction():
     
     class Departmental_Salary(Resource):
         def get(self):
-#             for singleshelfpos in ShelfList:
-#                 return Calculations.stockPercentage.UnitsToFill(singleshelfpos, XYGridList)   
-            return 1
+            XYGridList = XYGridObject.MakeXYGrid()
+            ShelfList = ShelfObject.makeShelfGrid()
+            for singleshelfpos in ShelfList:
+                measureUS.MeasureDistance(singleshelfpos.location, XYGridList) 
+                a =stockpercentages.UnitsToFill(singleshelfpos.location, XYGridList)
+                print(a)
+            return a
           
     class location(Resource):
-        def get(self):
-#             for singleshelfpos in ShelfList:
-#                 return Calculations.stockPercentage.UnitsToFill(singleshelfpos, XYGridList)   
+        def get(self):   
             return 2 
  
     api.add_resource(Departmental_Salary, '/measurements/')

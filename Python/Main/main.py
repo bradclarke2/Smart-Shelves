@@ -13,6 +13,6 @@ for singleshelfpos in ShelfList:
     print(singleshelfpos.location)
     measureUS.MeasureDistance(singleshelfpos.location, XYGridList)    
     stockpercentages.UnitsToFill(singleshelfpos.location, XYGridList)
-#     heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos.location)
+    heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos.location)
     
 test.startfunction()

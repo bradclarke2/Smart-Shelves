@@ -34,6 +34,8 @@ def UnitsToFill(singleshelfpos, XYGridList):
     numunitstofill = int(availablevolume / productVolume)
     # Print
     print(numunitstofill, " Quaker Oats can go out on ", singleshelfpos)
+    
+    return numunitstofill
         
  
 def ShelfAvgVolumePercentFull (singleshelfpos, XYGridList):
