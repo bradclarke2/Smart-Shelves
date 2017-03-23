@@ -45,7 +45,6 @@
 				<li><a href='/'>Home</a></li>
 				<li><a href='/percentages/'>Percentages</a></li>
 				<li><a href="/heatmap/">Heat Map</a></li>
-				<li><a href="/contact/">Contact</a></li>
 			  </ul>
 			</div> <!--well bs-sidebar affix-->
 		  </div> <!--col-sm-2-->
@@ -54,8 +53,6 @@
 			<div class='container-fluid'>
 			<table class="table">
 			<br><br>
-			{% block content %}
-			{% endblock %}
 			  <thead>
 			    <tr>
 			      <th>Priority #</th>
@@ -69,13 +66,15 @@
 			      <th scope="row">1</th>
 			      <td>Quaker Oats</td>
 			      <td>14R7A</td>
-			      <td>50</td>
+			      <td>{% block content %}
+                      {% endblock %}</td>
 			    </tr>
 			    <tr>
 			      <th scope="row">2</th>
 			      <td>Milk 4pts semi</td>
 			      <td>12L7B</td>
-			      <td>15</td>
+			      <td>{% block by %}
+                      {% endblock %}</td>
 			    </tr>
 			    <tr>
 			      <th scope="row">3</th>
@@ -87,6 +86,17 @@
 			</table>	
 			</div>
 		  </div>
+		          <div class="row">
+              <div class="col-sm-2">
+                  <br>
+              </div>
+              <div class="col-sm-10">
+                  <br>
+                  <center>
+                  <img src="{% static 'img/14L16E.png' %}" class="responsive-img" style='max-height:500px;' alt="face">
+                  </center>
+              </div>
+        </div><hr>
 		</div> 
 	</div>
 	<footer>

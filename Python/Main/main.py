@@ -1,5 +1,6 @@
 import Calculations.stockPercentage as stockpercentages
 import Measurements.MeasureUS as measureUS
+from Graphing.Heatmap import MakeHeatMap
         
 class XYGrid(object):
     """__init__() functions as the class constructor"""
@@ -47,12 +48,18 @@ app = Flask(__name__)
 api = Api(app)
 
 class Departmental_Salary(Resource):
+    def get(self):          
+        return percentageVolumeOccupied
+
+
+
+class Shelf_Location(Resource):
     def get(self):
-        GridTemp=[]
-        for XYGrid in XYGridList:
-            GridTemp.append([XYGrid.idpos, XYGrid.xpos, XYGrid.ypos, XYGrid.distance])
-        return GridTemp            
- 
+        shelfLocation = "12khnsakj"
+        return shelfLocation   
+     
+api.add_resource(Shelf_Location, '/shelflocation/')
 api.add_resource(Departmental_Salary, '/measurements/')
+
 
 app.run()
