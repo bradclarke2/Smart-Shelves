@@ -13,8 +13,6 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
         Z_dat.append(Ztemp)
         
     p = plt.imshow(Z_dat)    
-
-    
     
     fig = plt.gcf()
     print(fig)

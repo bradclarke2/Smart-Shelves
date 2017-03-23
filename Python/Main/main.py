@@ -8,7 +8,6 @@ ShelfLocations = ["14L8E" , "15R2A"]
 
 XYGridList = XYGridObject.MakeXYGrid()
 print (XYGridList)
-
     
 for singleshelfpos in ShelfLocations:
     measureUS.MeasureDistance(singleshelfpos, XYGridList)    
