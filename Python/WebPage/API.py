@@ -1,5 +1,4 @@
-import Measurements
-from Main.main import XYGridList, ShelfLocations
+from Main.main import XYGridList, ShelfList
 import Calculations
 
 def startfunction():
@@ -10,7 +9,7 @@ def startfunction():
     
     class Departmental_Salary(Resource):
         def get(self):
-            for singleshelfpos in ShelfLocations:
+            for singleshelfpos in ShelfList:
                 return Calculations.stockPercentage.UnitsToFill(singleshelfpos, XYGridList)      
  
     api.add_resource(Departmental_Salary, '/measurements/')
