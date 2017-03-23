@@ -1,25 +1,14 @@
-import matplotlib.pyplot as plt
-import numpy as np
+from flask import Flask, request
+from flask_restful import Resource, Api
+from json import dumps
 
-x = np.arange(3)
-y = np.arange(3)
+app = Flask(__name__)
+api = Api(app)
 
+class Departmental_Salary(Resource):
+    def get(self, department_name):
+        return department_name
+ 
+api.add_resource(Departmental_Salary, '/dept/<string:department_name>')
 
-
-z = x * y[:, np.newaxis]
-
-
-
-for i in range(5):
-    if i == 0:
-        p = plt.imshow(z)
-        fig = plt.gcf()
-        plt.clim()   # clamp the color limits
-        plt.title("Boring slide show")
-        plt.colorbar()  
-    else:
-        z = z + 2
-        p.set_data(z)
-
-    print("step", i)
-    plt.pause(0.5)
+app.run()
