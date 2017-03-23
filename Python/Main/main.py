@@ -1,9 +1,10 @@
 import Calculations.stockPercentage as stockpercentages
 import Graphing.Heatmap as heatmap
 import Measurements.MeasureUS as measureUS
-import WebPage.API as startAPI
 import Objects.XYGrid as XYGridObject
 import Objects.shelf as ShelfObject
+import WebPage.API as test
+
 
 XYGridList = XYGridObject.MakeXYGrid()
 ShelfList = ShelfObject.makeShelfGrid()
@@ -15,7 +16,7 @@ for singleshelf in ShelfList:
       
     stockpercentages.UnitsToFill(singleshelf, XYGridList)
     print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
-    
+
     heatmap.MakeHeatMap(singleshelf.height, XYGridList, singleshelf.location)
 
 
@@ -27,4 +28,5 @@ for Shelf in ShelfList:
      print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
 
   
-startAPI.startfunction()
+test.startfunction()
+
