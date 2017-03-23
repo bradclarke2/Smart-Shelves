@@ -6,11 +6,7 @@ def startfunction():
     
     class Departmental_Salary(Resource):
         def get(self):
-            GridTemp=[]
-            for XYGrid in XYGridList:
-                GridTemp.append([XYGrid.idpos, XYGrid.xpos, XYGrid.ypos, XYGrid.distance])
-            return GridTemp            
- 
+            return 1
     
     api.add_resource(Departmental_Salary, '/measurements/')
     app.run()
