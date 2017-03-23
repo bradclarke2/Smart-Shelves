@@ -3,15 +3,15 @@ import Graphing.Heatmap as heatmap
 import Measurements.MeasureUS as measureUS
 import WebPage.API as startAPI
 import Objects.XYGrid as XYGridObject
-        
-ShelfLocations = ["14L8E" , "15R2A"]
+import Objects.shelf as ShelfObject
 
 XYGridList = XYGridObject.MakeXYGrid()
-print (XYGridList)
-    
-for singleshelfpos in ShelfLocations:
-    measureUS.MeasureDistance(singleshelfpos, XYGridList)    
-    stockpercentages.UnitsToFill(singleshelfpos, XYGridList)
-    heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos)
+ShelfList = ShelfObject.makeShelfGrid()
+
+for singleshelfpos in ShelfList:
+    print(singleshelfpos.location)
+    measureUS.MeasureDistance(singleshelfpos.location, XYGridList)    
+    stockpercentages.UnitsToFill(singleshelfpos.location, XYGridList)
+    heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos.location)
     
 startAPI.startfunction()

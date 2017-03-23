@@ -57,5 +57,3 @@ def ShelfOccupiedVolume (percentageVolumeOccupied):
     OccupiedVolume = percentageVolumeOccupied * shelfVolume
     AvailableVolume = shelfVolume - OccupiedVolume
     return AvailableVolume
-    
-    

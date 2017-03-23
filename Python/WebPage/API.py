@@ -14,5 +14,3 @@ def startfunction():
     
     api.add_resource(Departmental_Salary, '/measurements/')
     app.run()
-
-
