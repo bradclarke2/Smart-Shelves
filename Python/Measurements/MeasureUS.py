@@ -2,7 +2,7 @@ import serial
 import time
 
 def MeasureDistance(singleshelfpos, XYGridList):
-    ser = serial.Serial('COM9')
+    ser = serial.Serial('COM9', 9600)
     ser.readline()
     time.sleep(2)
     waiter = 1

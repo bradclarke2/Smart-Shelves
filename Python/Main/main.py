@@ -1,6 +1,7 @@
 import Calculations.stockPercentage as stockpercentages
 import Graphing.Heatmap as heatmap
 import Measurements.MeasureUS as measureUS
+import WebPage.API as startAPI
         
 class XYGrid(object):
     """__init__() functions as the class constructor"""
@@ -10,6 +11,12 @@ class XYGrid(object):
         self.xpos = xpos
         self.ypos = ypos
         self.distance = distance
+        
+class ShelfLocationGrid(object):
+    """__init__() functions as the class constructor"""
+    def __init__(self, shelflocation = None, idpos=None, xpos = None, ypos = None, distance = None):
+        self.shelflocation = shelflocation
+        self.percentagefull = distance
         
 ShelfLocations = ["14L8E" , "15R2A"]
 
@@ -36,27 +43,8 @@ XYGridList.append(XYGrid("15R2A", 16, 2, 1, 0.00))
 XYGridList.append(XYGrid("15R2A", 17, 2, 2, 0.00))   
     
 for singleshelfpos in ShelfLocations:
-    
-    measureUS.MeasureDistance(singleshelfpos, XYGridList)
-    
-    print(singleshelfpos)
-    
+    measureUS.MeasureDistance(singleshelfpos, XYGridList)    
     stockpercentages.UnitsToFill(singleshelfpos, XYGridList)
     heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos)
     
-
-from flask import Flask
-from flask_restful import Resource, Api
-
-app = Flask(__name__)
-api = Api(app)
-
-class Departmental_Salary(Resource):
-    def get(self):
-        GridTemp=[]
-        for XYGrid in XYGridList:
-            GridTemp.append([XYGrid.idpos, XYGrid.xpos, XYGrid.ypos, XYGrid.distance])
-        return GridTemp            
- 
-api.add_resource(Departmental_Salary, '/measurements/')
-app.run()
+startAPI.startfunction()
