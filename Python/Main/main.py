@@ -3,8 +3,7 @@ import Graphing.Heatmap as heatmap
 import Measurements.MeasureUS as measureUS
 import Objects.XYGrid as XYGridObject
 import Objects.shelf as ShelfObject
-import Something
-
+import WebPage.API as test
 
 
 XYGridList = XYGridObject.MakeXYGrid()
@@ -14,6 +13,6 @@ for singleshelfpos in ShelfList:
     print(singleshelfpos.location)
     measureUS.MeasureDistance(singleshelfpos.location, XYGridList)    
     stockpercentages.UnitsToFill(singleshelfpos.location, XYGridList)
-    heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos.location)
+#     heatmap.MakeHeatMap(stockpercentages.shelfHeight, XYGridList, singleshelfpos.location)
     
-Something.API.startfunction()
+test.startfunction()
