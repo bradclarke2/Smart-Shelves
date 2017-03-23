@@ -21,6 +21,6 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
     plt.colorbar(boundaries=[0,1,2]) 
     plt.colorbar(orientation='horizontal')
     
-    fig.savefig("Graphing/heatmaps/" + ShelfName + ".png")  
+    fig.savefig("mysite/personal/static/img/" + ShelfName + ".png")  
 
     plt.show()

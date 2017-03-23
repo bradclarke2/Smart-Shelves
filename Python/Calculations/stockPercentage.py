@@ -1,7 +1,7 @@
 shelfHeight = 30
 shelfVolume = 21*40*17
 productVolume = 21*12.5*8
-    
+
 class StockPercentage:
     percentage = 0
     ifFull = "Looking Good!"
