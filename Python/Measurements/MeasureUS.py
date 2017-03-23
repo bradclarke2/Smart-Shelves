@@ -2,7 +2,7 @@ import serial
 import time
 
 def MeasureDistance(XYGridList):
-    ser = serial.Serial('COM4')
+    ser = serial.Serial('COM9')
     ser.readline()
     time.sleep(2)
     waiter = 1

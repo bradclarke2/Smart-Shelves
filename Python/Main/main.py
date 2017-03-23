@@ -11,7 +11,6 @@ class XYGrid(object):
 
 #checkStock.checkStock(XYGrid, XYGridList)
 
-
 XYGridList = []
 XYGridList.append(XYGrid(0, 0, 0, 0.00))
 XYGridList.append(XYGrid(1, 0, 1, 0.00))
@@ -34,10 +33,26 @@ occupiedVolume = percentageVolumeOccupied * shelfVolume
 
 volumeOfFreeSpace = shelfVolume - occupiedVolume
 
-
 print(int(volumeOfFreeSpace / productVolume), "This is how many Quaker Oats can go out")
-
 
 #heatmap.MakeHeatMap(shelfHeight, XYGridList, "14L16E")
 
 percentageVolumeOccupied = stockpercentages.ShelfAvgPercentageFull(shelfHeight, XYGridList)
+
+
+from flask import Flask, request
+from flask_restful import Resource, Api
+
+app = Flask(__name__)
+api = Api(app)
+
+class Departmental_Salary(Resource):
+    def get(self):
+        GridTemp=[]
+        for XYGrid in XYGridList:
+            GridTemp.append([XYGrid.idpos, XYGrid.xpos, XYGrid.ypos, XYGrid.distance])
+        return GridTemp            
+ 
+api.add_resource(Departmental_Salary, '/measurements/')
+
+app.run()
