@@ -1,6 +1,5 @@
 import Calculations.stockPercentage as stockpercentages
 import Measurements.MeasureUS as measureUS
-from Graphing.Heatmap import MakeHeatMap
         
 class XYGrid(object):
     """__init__() functions as the class constructor"""
@@ -40,7 +39,6 @@ print(int(volumeOfFreeSpace / productVolume), "This is how many Quaker Oats can 
 
 percentageVolumeOccupied = stockpercentages.ShelfAvgPercentageFull(shelfHeight, XYGridList)
 
-
 from flask import Flask, request
 from flask_restful import Resource, Api
 
@@ -55,11 +53,22 @@ class Departmental_Salary(Resource):
 
 class Shelf_Location(Resource):
     def get(self):
-        shelfLocation = "12khnsakj"
+        XYGridList = []
+        XYGridList.append(XYGrid(0, 0, 0, 0.00))
+        XYGridList.append(XYGrid(1, 0, 1, 0.00))
+        XYGridList.append(XYGrid(2, 0, 2, 0.00)) 
+        XYGridList.append(XYGrid(3, 1, 0, 0.00))
+        XYGridList.append(XYGrid(4, 1, 1, 0.00))
+        XYGridList.append(XYGrid(5, 1, 2, 0.00))
+        XYGridList.append(XYGrid(6, 2, 0, 0.00))
+        XYGridList.append(XYGrid(7, 2, 1, 0.00))
+        XYGridList.append(XYGrid(8, 2, 2, 0.00))  
+        measureUS.MeasureDistance(XYGridList)
+        shelfLocation = stockpercentages.ShelfAvgPercentageFull(shelfHeight, XYGridList)
+        print(shelfLocation)
         return shelfLocation   
      
 api.add_resource(Shelf_Location, '/shelflocation/')
 api.add_resource(Departmental_Salary, '/measurements/')
-
 
 app.run()
