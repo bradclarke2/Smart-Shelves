@@ -11,9 +11,7 @@ ShelfList = ShelfObject.makeShelfGrid()
 
 
 for singleshelf in ShelfList:
-    measureUS.MeasureDistance(singleshelf.location, XYGridList)  
-      
-      
+    measureUS.MeasureDistance(singleshelf, XYGridList)  
     stockpercentages.UnitsToFill(singleshelf, XYGridList)
     print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
 
@@ -25,8 +23,6 @@ for XYGrid in XYGridList:
     print(XYGrid.shelflocation,",",XYGrid.idpos,",",XYGrid.xpos,",",XYGrid.ypos,",",XYGrid.distance)
 print("ShelfGrid=")
 for Shelf in ShelfList:
-     print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
+    print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
 
-  
 test.startfunction()
-

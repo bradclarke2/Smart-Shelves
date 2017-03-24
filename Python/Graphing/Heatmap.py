@@ -12,7 +12,7 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
                     Ztemp.append(stockpercentages.SingleEmptyFull(shelfHeight, XYGrid.distance))
         Z_dat.append(Ztemp)
         
-    p = plt.imshow(Z_dat)    
+    p = plt.imshow(Z_dat, cmap="RdYlGn")    
     
     fig = plt.gcf()
     print(fig)
@@ -20,6 +20,8 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
     plt.title("Stock Level - " + ShelfName)
     plt.colorbar(boundaries=[0,1,2], orientation='horizontal')
     
-    fig.savefig("mysite/personal/static/img/" + ShelfName + ".png")  
+    fig.savefig("mysite/personal/static/img/" + ShelfName + ".png")
+    
+    plt.close()  
 
     #plt.show()

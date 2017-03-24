@@ -33,6 +33,7 @@ def UnitsToFill(singleshelf, XYGridList):
     availablevolume = ShelfOccupiedVolume (singleshelf)
     # Calculate number of units to fill the space
     singleshelf.unitsOfSpace = int(availablevolume / productVolume) 
+    return singleshelf.unitsOfSpace
 
         
  

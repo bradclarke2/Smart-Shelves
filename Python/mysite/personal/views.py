@@ -4,7 +4,20 @@ import urllib
 
 # Create your views here.
 def index (request):
-    a = render(request,'personal/basic.html', {'content':[urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()], 
-                                               'shelflocation':[urllib.request.urlopen("http://127.0.0.1:5000/shelflocation/").read()]
+    try:
+        content = [urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()]
+    except urllib.error.HTTPError as err:
+        if err.code == 404:
+            print ("Page not found!")
+        elif err.code == 403:
+            print ("Access denied!")
+        else:
+            print ("Something happened! Error code", err.code)
+    except urllib.error.URLError as err:
+        print ("Some other error happened:", err.reason)    
+        
+    a = render(request,'personal/basic.html', {'content':content, #[urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()], 
+                                               'shelflocation':[urllib.request.urlopen("http://127.0.0.1:5000/shelflocation/").read()],
+#                                                'pictureregen':urllib.request.urlopen("http://127.0.0.1:5000/pictureregen/")
                                                })
     return a

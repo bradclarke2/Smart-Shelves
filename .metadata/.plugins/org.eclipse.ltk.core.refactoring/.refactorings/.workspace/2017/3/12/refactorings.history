@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;SmartShelf&apos;" deleteContents="false" description="Delete resource &apos;SmartShelf&apos;" element1="/SmartShelf" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1490002400001"/>&#x0A;<refactoring comment="Delete resource &apos;Python/Product&apos;" deleteContents="false" description="Delete resource &apos;Python/Product&apos;" element1="/Python/Product" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1490006661401"/>
-</session>
