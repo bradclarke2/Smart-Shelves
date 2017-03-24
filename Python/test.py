@@ -1,14 +1,6 @@
-from flask import Flask, request
-from flask_restful import Resource, Api
-from json import dumps
+import Objects.product as product
 
-app = Flask(__name__)
-api = Api(app)
+test = product.makeProductGrid()
 
-class Departmental_Salary(Resource):
-    def get(self, department_name):
-        return department_name
- 
-api.add_resource(Departmental_Salary, '/dept/<string:department_name>')
-
-app.run()
+for x in test:
+    print(x.name, ",", x.tpnb, ",",x.height, ",",x.width, ",",x.depth, ",",x.weight)
