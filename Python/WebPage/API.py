@@ -3,6 +3,7 @@ import Objects.shelf as ShelfObject
 import Calculations.stockPercentage as stockpercentages
 import Measurements.MeasureUS as measureUS
 import Graphing.Heatmap as heatmap
+import Objects.product as ProductObject
 
 
 def startfunction():
@@ -13,11 +14,12 @@ def startfunction():
     
     class Departmental_Salary(Resource):
         def get(self):
+            ProductList = ProductObject.makeProductGrid()
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
             for singleshelf in ShelfList:
                 measureUS.MeasureDistance(singleshelf, XYGridList) 
-                stockpercentages.UnitsToFill(singleshelf, XYGridList)
+                stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)
                 heatmap.MakeHeatMap(singleshelf.height, XYGridList, singleshelf.location)
             print("XYGrid=")
             for XYGrid in XYGridList:
