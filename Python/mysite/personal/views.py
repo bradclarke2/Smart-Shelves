@@ -1,13 +1,13 @@
 from django.shortcuts import render
 import urllib
 
-
 # Create your views here.
 def index (request):
     try:
         content = [urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()]
     except urllib.error.HTTPError as err:
-        if err.code == 404:
+        if err.code == 500:
+            content = "not found"
             print ("Page not found!")
         elif err.code == 403:
             print ("Access denied!")

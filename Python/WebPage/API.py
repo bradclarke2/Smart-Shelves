@@ -5,7 +5,6 @@ import Measurements.MeasureUS as measureUS
 import Graphing.Heatmap as heatmap
 import Objects.product as ProductObject
 
-
 def startfunction():
     from flask import Flask
     from flask_restful import Resource, Api
