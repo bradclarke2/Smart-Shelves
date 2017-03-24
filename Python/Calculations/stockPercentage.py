@@ -1,5 +1,3 @@
-productVolume = 21*12.5*8
-
 class StockPercentage:
     percentage = 0
     ifFull = "Looking Good!"
@@ -23,7 +21,11 @@ def SingleEmptyFull(shelfHeight, measurementCM):
     elif (PercFull > 2/3):
         return 2   
     
-def UnitsToFill(singleshelf, XYGridList):
+def UnitsToFill(singleshelf, ProductList, XYGridList,):
+    for product in ProductList:
+        if product.tpnb == singleshelf.tpnb:
+            productVolume = product.height * product.width * product.depth
+    
     shelfHeight = singleshelf.height
     shelfLocation = singleshelf.location
     print("height=", shelfHeight, "loc=", shelfLocation)
@@ -35,8 +37,6 @@ def UnitsToFill(singleshelf, XYGridList):
     singleshelf.unitsOfSpace = int(availablevolume / productVolume) 
     return singleshelf.unitsOfSpace
 
-        
- 
 def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     averagePercentageFullSum = 0 
     for XYGrid in XYGridList:
@@ -50,7 +50,6 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
 
 def ShelfOccupiedVolume (singleShelf):
     shelfVolume = singleShelf.height * singleShelf.width * singleShelf.depth
-    
     OccupiedVolume = singleShelf.volumePercentFull * shelfVolume
     print(singleShelf.location, "volume = ", shelfVolume, "volpercenfull=", singleShelf.volumePercentFull, "occupiedvolume=", OccupiedVolume)
     AvailableVolume = shelfVolume - OccupiedVolume
