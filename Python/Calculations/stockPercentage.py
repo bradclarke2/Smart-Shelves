@@ -15,11 +15,11 @@ def checkStock(XYGrid, XYGridList):
 def SingleEmptyFull(shelfHeight, measurementCM):
     PercFull = measurementCM / shelfHeight
     if (PercFull < 1/3):
-        return 0
+        return 2
     elif (PercFull < 2/3 and PercFull > 1/3):
         return 1
     elif (PercFull > 2/3):
-        return 2   
+        return 0   
     
 def UnitsToFill(singleshelf, ProductList, XYGridList,):
     for product in ProductList:
