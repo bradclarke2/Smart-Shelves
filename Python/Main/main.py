@@ -5,6 +5,7 @@ import Objects.XYGrid as XYGridObject
 import Objects.shelf as ShelfObject
 import Objects.product as ProductObject
 import WebPage.API as test
+import InsertDB as insertDB
 
 ProductList = ProductObject.makeProductGrid()
 XYGridList = XYGridObject.MakeXYGrid()
@@ -16,17 +17,21 @@ for singleshelf in ShelfList:
 
     print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
     heatmap.MakeHeatMap(singleshelf.height, XYGridList, singleshelf.location)
-
-print("XYGrid=")
-for XYGrid in XYGridList:
-    print(XYGrid.shelflocation,",",XYGrid.idpos,",",XYGrid.xpos,",",XYGrid.ypos,",",XYGrid.distance)
-
-print("ShelfGrid=")
-for Shelf in ShelfList:
-    print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
-
-print("ProductList")
-for Product in ProductList:
-    print(Product.name, ",", Product.tpnb, ",",Product.height, ",",Product.width, ",",Product.depth, ",",Product.weight)
+    
+    insertDB.insertShelfRecord(singleshelf.location, singleshelf.tpnb, singleshelf.unitsOccupied, singleshelf.volumePercentFull)
+    
+# print("XYGrid=")
+# for XYGrid in XYGridList:
+#     print(XYGrid.shelflocation,",",XYGrid.idpos,",",XYGrid.xpos,",",XYGrid.ypos,",",XYGrid.distance)
+# 
+# print("ShelfGrid=")
+# for Shelf in ShelfList:
+#     print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
+# 
+# print("ProductList")
+# for Product in ProductList:
+#     print(Product.name, ",", Product.tpnb, ",",Product.height, ",",Product.width, ",",Product.depth, ",",Product.weight)
+    
+insertDB.printShelfDB()
 
 test.startfunction()

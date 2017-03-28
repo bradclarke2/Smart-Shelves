@@ -33,7 +33,7 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
             lab = "High"
         cbar.ax.text(1.5, (2 * j + 1) / 6.0, lab, ha='left', va='center')
         
-    plt.title("Stock Level - UltraSound -" + ShelfName)
+    plt.title("Stock Level - UltraSonic -" + ShelfName)
     
     plt.xticks([0, 1, 2, 3])
     plt.yticks([0, 1, 2, 3])
@@ -42,4 +42,5 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
     
     ax.set_xticklabels(['Left','','','Right'])
     ax.set_yticklabels(['Front','','','Back'])
-    fig.savefig("mysite/personal/static/img/UltraSound" + ShelfName + ".png")
+    
+    fig.savefig("mysite/personal/static/img/UltraSonic" + ShelfName + ".png")

@@ -7,10 +7,11 @@ class Shelf(object):
         self.volumePercentFull = 0
         self.areaFull = 0
         self.tpnb = tpnb
+        self.unitsOccupied = 0
         self.unitsOfSpace = 0
 
 def makeShelfGrid(): 
     MadeList = []
-    MadeList.append(Shelf("14L8E", 30.0, 50.0, 20.0, "062609056"))
-    MadeList.append(Shelf("15R2A", 30.0, 50.0, 20.0, "050060399"))
+    MadeList.append(Shelf("14L8E", 22.54, 50.0, 20.0, "062609056"))
+    MadeList.append(Shelf("15R2A", 22.54, 50.0, 20.0, "050060399"))
     return MadeList

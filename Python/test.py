@@ -1,34 +1,23 @@
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.colors import ListedColormap
+import sqlite3
+import datetime
+import time
+import CreateDB
 
-#discrete color scheme
-cMap = ListedColormap(['green', 'yellow','red'])
+#CreateDB.createDB()
+# Creates or opens a file called mydb with a SQLite3 DB
+db = sqlite3.connect(CreateDB.dbName)
 
-#data
-np.random.seed(42)
-data = np.random.rand(4, 4)
-fig, ax = plt.subplots()
-heatmap = ax.pcolor(data, cmap=cMap)
+# Get a cursor object
+cursor = db.cursor()
 
-#legend
-cbar = plt.colorbar(heatmap)
+cursor.execute('''
+    CREATE TABLE shelfGridTable(id INTEGER PRIMARY KEY, shelfLocation TEXT, TPNB TEXT, 
+        unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT) ''')
+db.commit()
 
-cbar.ax.get_yaxis().set_ticks([])
-for j, lab in enumerate(['$0$','$1$','$2$','$>3$']):
-    cbar.ax.text(.5, (2 * j + 1) / 8.0, lab, ha='center', va='center')
-cbar.ax.get_yaxis().labelpad = 15
-cbar.ax.set_ylabel('# of contacts', rotation=270)
-
-# put the major ticks at the middle of each cell
-ax.set_xticks(np.arange(data.shape[1]) + 0.5, minor=False)
-ax.set_yticks(np.arange(data.shape[0]) + 0.5, minor=False)
-ax.invert_yaxis()
-
-#lebels
-column_labels = list('012')
-row_labels = list('012')
-ax.set_xticklabels(column_labels, minor=False)
-ax.set_yticklabels(row_labels, minor=False)
-
-plt.show()
+cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp FROM shelfGridTable''')
+all_rows = cursor.fetchall()
+print("ID: shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp")
+for row in all_rows:
+    # row[0] returns the first column in the query (name), row[1] returns email column.
+    print('{0} : {1}, {2}, {3}, {4}, {5}'.format(row[0], row[1], row[2], row[3], row[4], row[5]))
