@@ -4,6 +4,7 @@ import Calculations.stockPercentage as stockpercentages
 import Measurements.MeasureUS as measureUS
 import Graphing.Heatmap as heatmap
 import Objects.product as ProductObject
+import InsertDB as insertDB
 
 def startfunction():
     from flask import Flask
@@ -28,15 +29,22 @@ def startfunction():
                 print(Shelf.location,",",Shelf.height,",",Shelf.width,",",Shelf.depth,",",Shelf.volumePercentFull,",", Shelf.areaFull,",",Shelf.unitsOfSpace)
             return singleshelf.unitsOfSpace
                  
-    class location(Resource):
-        def get(self):   
-            return 1 
-    
-    class picture_regen(Resource):
+    class list_priority(Resource):
         def get(self):
-            return 2
- 
+            ProductList = ProductObject.makeProductGrid()
+            XYGridList = XYGridObject.MakeXYGrid()
+            ShelfList = ShelfObject.makeShelfGrid()
+            for singleshelf in ShelfList:
+                measureUS.MeasureDistance(singleshelf, XYGridList)        
+                stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)          
+                print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
+                heatmap.MakeHeatMap(singleshelf, XYGridList)              
+                insertDB.insertShelfRecord(singleshelf)
+            insertDB.printShelfDB()
+            prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList)
+            return prioritisedFillList
+         
     api.add_resource(Departmental_Salary, '/measurements/')
-    api.add_resource(location, '/shelflocation/')
-    api.add_resource(picture_regen, '/pictureregen/')
+    api.add_resource(list_priority, '/list/')
+    
     app.run()

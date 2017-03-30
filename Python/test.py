@@ -1,23 +1,35 @@
-import sqlite3
-import datetime
-import time
-import CreateDB
+from flask import Flask, request
+from flask_restful import Resource, Api
+from sqlalchemy import create_engine
+import json
 
-#CreateDB.createDB()
-# Creates or opens a file called mydb with a SQLite3 DB
-db = sqlite3.connect(CreateDB.dbName)
+import json
 
-# Get a cursor object
-cursor = db.cursor()
+app = Flask(__name__)
+api = Api(app)
 
-cursor.execute('''
-    CREATE TABLE shelfGridTable(id INTEGER PRIMARY KEY, shelfLocation TEXT, TPNB TEXT, 
-        unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT) ''')
-db.commit()
+class Departments_Meta(Resource):
+    def get(self):
+        return 1
 
-cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp FROM shelfGridTable''')
-all_rows = cursor.fetchall()
-print("ID: shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp")
-for row in all_rows:
-    # row[0] returns the first column in the query (name), row[1] returns email column.
-    print('{0} : {1}, {2}, {3}, {4}, {5}'.format(row[0], row[1], row[2], row[3], row[4], row[5]))
+class Departmental_Salary(Resource):
+    def get(self, department_name):
+        return department_name
+    
+class Testings(Resource):
+    def get(self, department_name):
+        
+        d = {}
+        d["Name"] = "Luke"
+        d["Country"] = "Canada"
+ 
+        b = json.dumps(d, ensure_ascii=False)
+        
+        return b
+ 
+api.add_resource(Departmental_Salary, '/dept/<string:department_name>')
+api.add_resource(Departments_Meta, '/departments')
+api.add_resource(Testings, '/tests/<string:department_name>')
+
+if __name__ == '__main__':
+    app.run()

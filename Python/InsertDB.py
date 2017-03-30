@@ -3,7 +3,7 @@ import datetime
 import time
 import CreateDB
 
-def insertShelfRecord(shelfLocation, TPNB, unitsOfStock, percentageFull):
+def insertShelfRecord(singleshelf):
     # Creates or opens a file called mydb with a SQLite3 DB
     db = sqlite3.connect(CreateDB.dbName)
     cursor = db.cursor()
@@ -13,7 +13,7 @@ def insertShelfRecord(shelfLocation, TPNB, unitsOfStock, percentageFull):
      
     # Insert row 
     cursor.execute('''INSERT INTO shelfGridTable(shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp)
-                      VALUES(?,?,?,?,?)''', (shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp))
+                      VALUES(?,?,?,?,?)''', (singleshelf.location, singleshelf.tpnb, singleshelf.unitsOccupied, singleshelf.volumePercentFull, timestamp))
     db.commit()
 
 def printShelfDB():

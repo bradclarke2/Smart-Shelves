@@ -1,3 +1,5 @@
+import json
+
 class StockPercentage:
     percentage = 0
     ifFull = "Looking Good!"
@@ -53,3 +55,15 @@ def ShelfOccupiedVolume (singleShelf):
     shelfVolume = singleShelf.height * singleShelf.width * singleShelf.depth
     OccupiedVolume = singleShelf.volumePercentFull * shelfVolume
     return OccupiedVolume
+
+def calculateFillListOrder(ShelfList):
+    newlist = sorted(ShelfList, key=lambda x: x.unitsOfSpace, reverse=True)
+    print("orig=", ShelfList)
+    print("ordered=", newlist)
+    
+    master_list = []
+    for item in newlist:
+        master_list.append([item.location, item.height, item.width, item.depth, item.volumePercentFull, item.areaFull, item.unitsOfSpace, item.imglocation])
+
+   # master_list = json.dumps(master_list)
+    return master_list
