@@ -16,9 +16,11 @@ def MakeHeatMap(shelfHeight, XYGridList, ShelfName):
     
     fig = plt.gcf()
     print(fig)
-    plt.clim()   # clamp the color limits
+    plt.clim(0,2)   # clamp the color limits
     plt.title("Stock Level - " + ShelfName)
     plt.colorbar(boundaries=[0,1,2], orientation='horizontal')
+    plt.xticks([0,1,2])
+    plt.yticks([0,1,2])
     
     fig.savefig("mysite/personal/static/img/" + ShelfName + ".png")
     
