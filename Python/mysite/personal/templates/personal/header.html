@@ -43,7 +43,7 @@
 			<div class="well bs-sidebar" id="sidebar" style="background-color:#fff">
 			  <ul class="nav nav-pills nav-stacked">
 				<li><a href='/'>Home</a></li>
-				<li><a href='/percentages/'>Percentages</a></li>
+				<li><a href='/graph/'>Stock Graph</a></li>
 				<li><a href="/heatmap/">Heat Map</a></li>
 			  </ul>
 			</div> <!--well bs-sidebar affix-->
@@ -59,29 +59,12 @@
 			      <th>Item</th>
 			      <th>Location</th>
 			      <th>Units to Fill</th>
+			      <th>Heat Map</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr class="danger">
-			      <th scope="row">1</th>
-			      <td>Quaker Oats</td>
-			      <td>14R7A</td>
-			      <td>{% block content %}
-                      {% endblock %}</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">2</th>
-			      <td>Milk 4pts semi</td>
-			      <td>15R2A</td>
-			      <td>{% block by %}
-                      {% endblock %}</td>
-			    </tr>
-			    <tr>
-			      <th scope="row">3</th>
-			      <td>Window Cleaner 500ml</td>
-			      <td>5R17D</td>
-			      <td>25</td>
-			    </tr>
+			    {% block content %}
+                {% endblock %}
 			  </tbody>
 			</table>	
 			</div>

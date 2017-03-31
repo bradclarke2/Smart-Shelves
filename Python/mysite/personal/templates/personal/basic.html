@@ -2,7 +2,16 @@
 
 {% block content %}
     {% for c in content %}
-        <p>{{c}}</p>
+        <tr class="danger">
+          <th scope="row">{{forloop.counter}}</th>
+          <td>Quaker Oats</td>
+          <td>{{c.0}}</td>
+          <td>{{c.6}}</td>
+          <td><center>
+          {% load static %}
+          <img src="{% static 'img/jog on.gif' %}" class="responsive-img" style='max-height:50px;' alt="face">
+          </center></td>
+        </tr>
     {% endfor%}
 {% endblock %} 
 
@@ -10,4 +19,4 @@
     {% for d in shelflocation %}
         <p>{{d}}</p>
     {% endfor%}
-{% endblock %}    
+{% endblock %}
