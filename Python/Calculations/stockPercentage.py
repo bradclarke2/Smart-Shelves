@@ -63,7 +63,5 @@ def calculateFillListOrder(ShelfList):
     
     master_list = []
     for item in newlist:
-        master_list.append([item.location, item.height, item.width, item.depth, item.volumePercentFull, item.areaFull, item.unitsOfSpace, item.imglocation])
-
-   # master_list = json.dumps(master_list)
+        master_list.append([item.location, item.height, item.width, item.depth, item.volumePercentFull, item.areaFull, item.unitsOfSpace, item.imglocation, item.salesimglocation])
     return master_list

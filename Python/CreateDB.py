@@ -1,6 +1,4 @@
 import sqlite3
-import datetime
-import time
 
 dbName = "Database\\database.db"
 
