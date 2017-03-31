@@ -20,17 +20,7 @@ def MakeHeatMap(singleshelf, XYGridList):
         i = i - 1
         Z_dat.append(Ztemp)
     
-<<<<<<< HEAD
-    fig = plt.gcf()
-    print(fig)
-    plt.clim(0,2)   # clamp the color limits
-    plt.title("Stock Level - " + ShelfName)
-    plt.colorbar(boundaries=[0,1,2], orientation='horizontal')
-    plt.xticks([0,1,2])
-    plt.yticks([0,1,2])
-=======
     print(Z_dat)
->>>>>>> 5d3560457b950ce94444f3aaa16ed8544eb9dd86
     
     cMap = ListedColormap(['red', 'yellow', 'green'])
     fig, ax = plt.subplots()
