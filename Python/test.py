@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import sqlite3
 import Objects.shelf as ShelfObject
 import CreateDB
@@ -61,3 +62,11 @@ plt.setp(ax.xaxis.get_minorticklabels(), rotation=45)
 ax.xaxis.set_tick_params(which='major', pad=30)
 
 plt.show()
+=======
+import Objects.product as product
+
+test = product.makeProductGrid()
+
+for x in test:
+    print(x.name, ",", x.tpnb, ",",x.height, ",",x.width, ",",x.depth, ",",x.weight)
+>>>>>>> 43abd5238329f593fa78d87356103eb30537fb08
