@@ -97,7 +97,6 @@ float SonarDistance(int ECHO_PIN, int TRIG_PIN ){
 void loop() {
   int sensorValue = lowPassFilter.input (analogRead(A1));
   
-  
   Serial.print("US:");
   for (int x=0; x<numberOfSensors;x++){
     float a = SonarDistance(matrix[x][1], matrix[x][2]) ;  
@@ -110,8 +109,9 @@ void loop() {
     Serial.print(',');
   }
   Serial.print("PR:");
+
   for (int x=0; x<numberOfSensors;x++){
-    float a = sensorValue ;  
+    float a = SonarDistance(matrix[x][1], matrix[x][2]) ;  
     Serial.print(a);
 
     if (x==(numberOfSensors -1)){
@@ -120,5 +120,6 @@ void loop() {
     }
     Serial.print(',');
   }
+
   
 }
