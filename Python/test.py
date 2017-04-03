@@ -1,72 +1,29 @@
-<<<<<<< HEAD
-import sqlite3
-import Objects.shelf as ShelfObject
-import CreateDB
-import matplotlib.pyplot as plt
-import time
-from matplotlib import dates
-from datetime import datetime
-import InsertDB
+########### Python 3.2 #############
+import http.client, urllib.request, urllib.parse, urllib.error, base64
+import json
 
-ShelfList = ShelfObject.makeShelfGrid()
+headers = {
+    # Request headers
+    'Ocp-Apim-Subscription-Key': '5c5d3ac3d5a9414face805ad31bc13b5',
+}
 
-singleshelf = ShelfList[1]
-print(singleshelf.location)
+params = urllib.parse.urlencode({
+    # Request parameters
+    'tpnb': '054550994',
 
-InsertDB.insertShelfRecord(singleshelf)
+})
 
-db = sqlite3.connect(CreateDB.dbName)
-cursor = db.cursor()
-cursor.execute("SELECT * FROM shelfGridTable WHERE shelfLocation = (?)", (singleshelf.location,))
-
-all_rows = cursor.fetchall()
-i = len(all_rows)
-
-x = []
-y = []
-
-x_min = 0
-x_max = 0
-
-for a in range (0, i): 
-    x_reformated = datetime.strptime(all_rows[a][5], '%Y-%m-%d %H:%M:%S')
-    x.append(x_reformated)
-    y.append(all_rows[a][3])
-    if x_min == 0 or x_reformated < x_min:
-        x_min = x_reformated
-        print("new min = ", x_min)
-    if x_max == 0 or x_reformated > x_max:
-        x_max = x_reformated
-        print("new max = ", x_max)
+try:
+    conn = http.client.HTTPSConnection('dev.tescolabs.com')
+    conn.request("GET", "/product/?%s" % params, "{body}", headers)
+    response = conn.getresponse()
+    data = response.read()
+    print(data)
+    conn.close()
+    parsed_data = json.loads(data)
+    description = parsed_data['products'][0]['description']
+    print(description)
     
-fig, ax = plt.subplots()
+except Exception as e:
+    print("[Errno {0}] {1}".format(e.errno, e.strerror))
 
-days = dates.DayLocator(interval=1)
-dayfmt = dates.DateFormatter("%d/%m")
-hours = dates.HourLocator(interval=3)
-hourfmt = dates.DateFormatter('%H:%M')
-
-ax.xaxis.set_minor_locator(hours)
-ax.xaxis.set_minor_formatter(hourfmt)
-ax.xaxis.set_major_locator(days)
-ax.xaxis.set_major_formatter(dayfmt)
-
-datemin = datetime.date(x_min)
-datemax = datetime.date(x_max)
-ax.set_xlim(datemin, datemax)
-
-ax.plot(x, y, '-', x, y, 'o')
-
-plt.setp(ax.xaxis.get_minorticklabels(), rotation=45)
-
-ax.xaxis.set_tick_params(which='major', pad=30)
-
-plt.show()
-=======
-import Objects.product as product
-
-test = product.makeProductGrid()
-
-for x in test:
-    print(x.name, ",", x.tpnb, ",",x.height, ",",x.width, ",",x.depth, ",",x.weight)
->>>>>>> 43abd5238329f593fa78d87356103eb30537fb08

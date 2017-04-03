@@ -6,7 +6,6 @@ import datetime
 import sqlite3
 import CreateDB
 from matplotlib import dates
-#from datetime import datetime
 
 def MakeHeatMap(singleshelf, XYGridList):
     shelfHeight = singleshelf.height
@@ -53,14 +52,11 @@ def MakeHeatMap(singleshelf, XYGridList):
     ax.set_xticklabels(['Left','','','Right'])
     ax.set_yticklabels(['Front','','','Back'])
     
-    
     file_string = "mysite/personal/static/img/UltraSonic" + shelfName + timestamp + ".png"
     fig.savefig(file_string)
     
     web_string = "img/UltraSonic" + shelfName + timestamp + ".png"
     singleshelf.imglocation = web_string
-
-    
     
 def MakeSalesGraph(singleshelf):
     db = sqlite3.connect(CreateDB.dbName)
@@ -82,10 +78,10 @@ def MakeSalesGraph(singleshelf):
         y.append(all_rows[a][3])
         if x_min == 0 or x_reformated < x_min:
             x_min = x_reformated
-            print("new min = ", x_min)
+            #print("new min = ", x_min)
         if x_max == 0 or x_reformated > x_max:
             x_max = x_reformated
-            print("new max = ", x_max)
+            #print("new max = ", x_max)
         
     fig, ax = plt.subplots()
     
@@ -98,18 +94,12 @@ def MakeSalesGraph(singleshelf):
     ax.xaxis.set_minor_formatter(hourfmt)
     ax.xaxis.set_major_locator(days)
     ax.xaxis.set_major_formatter(dayfmt)
-#     
-#     datemin = datetime.date(x_min)
-#     datemax = datetime.date(x_max)
-#     ax.set_xlim(datemin, datemax)
-    
+     
     ax.plot(x, y, '-', x, y, 'o')
     
     plt.setp(ax.xaxis.get_minorticklabels(), rotation=45)
     
     ax.xaxis.set_tick_params(which='major', pad=30)
-    
-    plt.show()
     
     file_string = "mysite/personal/static/img/StockHistory-" + singleshelf.location + ".png"
     fig.savefig(file_string)

@@ -28,8 +28,19 @@ def UnitsToFill(singleshelf, ProductList, XYGridList,):
     availablevolume = ShelfAvailableVolume (singleshelf)
     occupiedVolume = ShelfOccupiedVolume(singleshelf)
     # Calculate number of units to fill the space
-    singleshelf.unitsOccupied = int (occupiedVolume / productVolume)
-    singleshelf.unitsOfSpace = int(availablevolume / productVolume)
+    
+    unitsOccupied = int (occupiedVolume / productVolume)
+    if unitsOccupied < 0:
+        singleshelf.unitsOccupied = 0
+    else:
+        singleshelf.unitsOccupied = unitsOccupied
+        
+    unitsOfSpace = int(availablevolume / productVolume)
+    if unitsOfSpace < 0:
+        singleshelf.unitsOfSpace = 0
+    else:
+        singleshelf.unitsOfSpace = unitsOfSpace
+    
 
 def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     averagePercentageFullSum = 0 
@@ -40,7 +51,8 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
     print("avg%fullsum=", averagePercentageFullSum)
     averagePercentageFull =round((averagePercentageFullSum /9),2)
-    if averagePercentageFull < 0.001 and averagePercentageFull > -0.05:
+    print(averagePercentageFull, "= abg percent full")
+    if averagePercentageFull < 0.005 and averagePercentageFull > -0.05:
         averagePercentageFull = 0
     return averagePercentageFull
 

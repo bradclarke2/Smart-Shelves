@@ -5,6 +5,7 @@ import Measurements.MeasureUS as measureUS
 import Graphing.Heatmap as heatmap
 import Objects.product as ProductObject
 import InsertDB as insertDB
+from scipy.cluster.hierarchy import single
 
 def startfunction():
     from flask import Flask
@@ -35,13 +36,13 @@ def startfunction():
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
             for singleshelf in ShelfList:
-                #measureUS.MeasureDistance(singleshelf, XYGridList)        
-                stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)          
+                measureUS.MeasureDistance(singleshelf, XYGridList)        
+                stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)      
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
                 heatmap.MakeHeatMap(singleshelf, XYGridList)              
                 insertDB.insertShelfRecord(singleshelf)
                 heatmap.MakeSalesGraph(singleshelf)
-            insertDB.printShelfDB()
+            #insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList)
             return prioritisedFillList
          

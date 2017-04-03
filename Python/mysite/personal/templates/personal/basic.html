@@ -7,10 +7,12 @@
           <td>Quaker Oats</td>
           <td>{{c.0}}</td>
           <td>{{c.6}}</td>
-          <td><center>
+          <td>
           {% load static %}
-          <img src="{% static 'img/jog on.gif' %}" class="responsive-img" style='max-height:50px;' alt="face">
-          </center></td>
+          <a href="/map/">
+          <img src="{% static ""%}{{c.7}}" class="responsive-img" style='max-height:100px;' alt="face">
+          </a>
+          </td>
         </tr>
     {% endfor%}
 {% endblock %} 
