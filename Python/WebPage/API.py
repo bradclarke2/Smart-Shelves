@@ -5,7 +5,6 @@ import Measurements.MeasureUS as measureUS
 import Graphing.Heatmap as heatmap
 import Objects.product as ProductObject
 import InsertDB as insertDB
-from scipy.cluster.hierarchy import single
 
 def startfunction():
     from flask import Flask

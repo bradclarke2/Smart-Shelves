@@ -5,6 +5,7 @@ Python/mysite/personal/__pycache__
 *.pyc
 *.pyo
 eggs
+*.png
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -2,7 +2,11 @@
 
 {% block content %}
     {% for c in content %}
-        <tr class="danger">
+        {% if c.6 > 4 %}
+        <tr class="bg-danger">
+        {% else %}
+        <tr class="bg-warning">
+        {% endif %}
           <th scope="row">{{forloop.counter}}</th>
           <td>Quaker Oats</td>
           <td>{{c.0}}</td>
