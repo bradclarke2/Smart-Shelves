@@ -46,7 +46,7 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     averagePercentageFullSum = 0 
     for XYGrid in XYGridList:
         if (XYGrid.shelflocation == shelfLocation):
-            sensorMeasurement = XYGrid.distance
+            sensorMeasurement = XYGrid.USdistance
             percentageFull = 1 - ( (sensorMeasurement - 4) /shelfHeight)  
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
     print("avg%fullsum=", averagePercentageFullSum)

@@ -2,18 +2,20 @@
 
 {% block content %}
     {% for c in content %}
-        <tr class="danger">
-          <th scope="row">{{forloop.counter}}</th>
-          <td>Quaker Oats</td>
-          <td>{{c.0}}</td>
-          <td>{{c.6}}</td>
-          <td>
-          {% load static %}
-          <a href="/map/">
-          <img src="{% static ""%}{{c.7}}" class="responsive-img" style='max-height:100px;' alt="face">
-          </a>
-          </td>
-        </tr>
+
+            <tr class="danger">
+              <th scope="row">{{forloop.counter}}</th>
+              <td>Quaker Oats</td>
+              <td>{{c.0}}</td>
+              <td>{{c.6}}</td>
+              <td>
+              {% load static %}
+              <a href="/map/">
+              <img src="{% static ""%}{{c.7}}" class="responsive-img" style='max-height:100px;' alt="face">
+              </a>
+              </td>
+            </tr>
+            
     {% endfor%}
 {% endblock %} 
 
