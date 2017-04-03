@@ -1,9 +1,13 @@
+#include <Filters.h>
 // Pins
 int TRIG_PIN;
 int ECHO_PIN;
 // Anything over 400 cm (23200 us pulse) is "out of range"
 const unsigned int MAX_DIST = 23200;
 int numberOfSensors = 18; //change to the number of sensors being used
+
+float filterFrequency = 2.0;  
+FilterOnePole lowPassFilter( LOWPASS, filterFrequency );
 
 const int matrix [18][3] ={ //sensor,echo,trigger
 //  // 14L8E
@@ -91,6 +95,8 @@ float SonarDistance(int ECHO_PIN, int TRIG_PIN ){
 }
 
 void loop() {
+  int sensorValue = lowPassFilter.input (analogRead(A1));
+  
   Serial.print("US:");
   for (int x=0; x<numberOfSensors;x++){
     float a = SonarDistance(matrix[x][1], matrix[x][2]) ;  
@@ -103,6 +109,7 @@ void loop() {
     Serial.print(',');
   }
   Serial.print("PR:");
+
   for (int x=0; x<numberOfSensors;x++){
     float a = SonarDistance(matrix[x][1], matrix[x][2]) ;  
     Serial.print(a);
@@ -113,5 +120,6 @@ void loop() {
     }
     Serial.print(',');
   }
+
   
 }
