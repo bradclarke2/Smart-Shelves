@@ -36,7 +36,7 @@ def startfunction():
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
             for singleshelf in ShelfList:
-                measureUS.MeasureDistance(singleshelf, XYGridList)        
+                measureUS.MeasureDistanceUS(singleshelf, XYGridList)        
                 stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)      
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
                 heatmap.MakeHeatMap(singleshelf, XYGridList)              
