@@ -2,6 +2,10 @@ import serial
 import time
 import random
 
+
+    
+    
+
 def MeasureDistanceUS(singleshelf, XYGridList):
 #
 #     for XYGrid in XYGridList:
@@ -70,4 +74,4 @@ def MeasureDistancePR(singleshelf, XYGridList):
     for XYGrid in XYGridList:
         if ( XYGrid.shelflocation == singleshelf.location):
             XYGrid.PRCovered = listData[XYGrid.idpos]
-            print("id=",XYGrid.idpos,"dist=",XYGrid.distance)
+            print("id=",XYGrid.idpos,"dist=",XYGrid.PRCovered)
