@@ -36,7 +36,7 @@ def startfunction():
             ShelfList = ShelfObject.makeShelfGrid()
             for singleshelf in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
-                measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                #measureUS.MeasureDistancePR(singleshelf, XYGridList)
                 
                 #stockpercentages.CalculateConfidence(singleshelf.height, measurementCM, lumens)    
                    

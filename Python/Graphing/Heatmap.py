@@ -18,6 +18,7 @@ def MakeHeatMap(singleshelf, XYGridList):
         for j in range(0,3):
             for XYGrid in XYGridList:
                 if (XYGrid.xpos == i and XYGrid.ypos == j and XYGrid.shelflocation == shelfName):
+                    print("xydist=", XYGrid.USdistance)
                     Ztemp.append(stockpercentages.USFullness(shelfHeight, XYGrid.USdistance))
         i = i - 1
         Z_dat.append(Ztemp)
