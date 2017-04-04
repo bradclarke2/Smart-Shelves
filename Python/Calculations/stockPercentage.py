@@ -1,4 +1,5 @@
 import json
+from Main.JordanAsad import shelfHeight
 
 class StockPercentage:
     percentage = 0
@@ -6,14 +7,30 @@ class StockPercentage:
     ifEmpty = "Fill me UP!"
     count =0
 
-def SingleEmptyFull(shelfHeight, measurementCM):
+def USFullness(shelfHeight, measurementCM):
     PercFull = measurementCM / shelfHeight
     if (PercFull < 1/3):
         return 2
     elif (PercFull < 2/3 and PercFull > 1/3):
         return 1
     elif (PercFull > 2/3):
-        return 0   
+        return 0
+    
+def PRFullness(lumens):
+    if (Lumens > 450):
+        return 2
+    elif (Lumens > 100 and Lumens < 450):
+        return 1
+    elif (PercFull < 100):
+        return 0
+        
+    
+def CalculateConfidence(shelfHeight, measurementCM, lumens):
+    if USFullness(shelfHeight, measurementCM) == PRFullness(lumens):
+        return USFullness
+    else:
+        return -1
+    
     
 def UnitsToFill(singleshelf, ProductList, XYGridList,):
     for product in ProductList:
@@ -46,7 +63,7 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     averagePercentageFullSum = 0 
     for XYGrid in XYGridList:
         if (XYGrid.shelflocation == shelfLocation):
-            sensorMeasurement = XYGrid.distance
+            sensorMeasurement = XYGrid.USdistance
             percentageFull = 1 - ( (sensorMeasurement - 4) /shelfHeight)  
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
     print("avg%fullsum=", averagePercentageFullSum)
@@ -74,6 +91,7 @@ def calculateFillListOrder(ShelfList):
     print("ordered=", newlist)
     
     master_list = []
-    for item in newlist:
-        master_list.append([item.location, item.height, item.width, item.depth, item.volumePercentFull, item.areaFull, item.unitsOfSpace, item.imglocation, item.salesimglocation])
+    for singleshelf in newlist:
+        master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation])
     return master_list
+
