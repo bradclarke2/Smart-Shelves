@@ -1,18 +1,5 @@
 {% extends "personal/header.html" %}
 
 {% block content %}
-    {% for c in content %}
-        <tr class="danger">
-                  <th scope="row">{{forloop.counter}}</th>
-                  <td>Quaker Oats</td>
-                  <td>14R7A</td>
-                  <td>{{c}}</td>
-                </tr>
-    {% endfor%}
-{% endblock %} 
 
-{% block by %}
-    {% for d in shelflocation %}
-        <p>{{d}}</p>
-    {% endfor%}
 {% endblock %}    
