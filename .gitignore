@@ -1,5 +1,6 @@
 .metadata/
 __pycache__/
+Python/Database
 Python/.metadata
 Python/mysite/personal/__pycache__
 *.pyc
