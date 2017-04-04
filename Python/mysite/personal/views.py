@@ -20,8 +20,7 @@ def index (request):
 #     test = content.split('], [')
 #     test = np.asarray(content)
     test = ast(content)
-    
-            
+                
     a = render(request,'personal/basic.html', {'content':test, #[urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()], 
 #                                                'shelflocation':[urllib.request.urlopen("http://127.0.0.1:5000/shelflocation/").read()],
 #                                                'pictureregen':urllib.request.urlopen("http://127.0.0.1:5000/pictureregen/")

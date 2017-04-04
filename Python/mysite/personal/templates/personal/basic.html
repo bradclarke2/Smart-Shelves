@@ -2,27 +2,22 @@
 
 {% block content %}
     {% for c in content %}
-        {% if c.6 > 4 %}
-        <tr class="bg-danger">
+        {% if c.2 > 4 %}
+        <tr class="bg-primary text-white" style="background-color:#ff5B43" style="color:#ffffff">
         {% else %}
-        <tr class="bg-warning">
+        <tr class="bg-warning" style="background-color:#e8b70a">
         {% endif %}
           <th scope="row">{{forloop.counter}}</th>
+          <td><img src="https://img.tesco.com/Groceries/pi/988/5000108810988/IDShot_540x540.jpg" class="responsive-img" style='max-height:100px;' alt="face"></td>
           <td>Quaker Oats</td>
-          <td>{{c.0}}</td>
-          <td>{{c.6}}</td>
+          <td>{{c.1}}</td>
+          <td>{{c.2}}</td>
           <td>
           {% load static %}
-          <a href="/map/">
-          <img src="{% static ""%}{{c.7}}" class="responsive-img" style='max-height:100px;' alt="face">
-          </a>
+          <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
+          <img src="{% static ""%}{{c.3}}" id="{{c.3}}" class="responsive-img" style='max-height:100px;' alt="face">
+          </button>
           </td>
         </tr>
     {% endfor%}
 {% endblock %} 
-
-{% block by %}
-    {% for d in shelflocation %}
-        <p>{{d}}</p>
-    {% endfor%}
-{% endblock %}
