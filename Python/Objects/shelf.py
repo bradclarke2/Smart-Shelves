@@ -10,12 +10,11 @@ class Shelf(object):
         self.unitsOccupied = 0
         self.unitsOfSpace = 0
         self.imglocation = ""
-        self.salesimglocation = ""
-        
+        self.salesimglocation = ""    
 
 def makeShelfGrid(): 
     MadeList = []
-    MadeList.append(Shelf("1L4B", 22.54, 50.0, 20.0, "06260901"))
+    MadeList.append(Shelf("1L4B", 47, 50.0, 20.0, "06260901"))
     MadeList.append(Shelf("2R6A", 22.54, 50.0, 20.0, "050060302"))
     MadeList.append(Shelf("3L5A", 22.54, 50.0, 20.0, "062609003"))
     MadeList.append(Shelf("4L1B", 22.54, 50.0, 20.0, "062609003"))

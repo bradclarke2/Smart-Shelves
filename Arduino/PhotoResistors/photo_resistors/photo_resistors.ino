@@ -1,16 +1,27 @@
-#include <Filters.h>
+int analogPin = 3;     // potentiometer wiper (middle terminal) connected to analog pin 3
 
-void setup() {
- Serial.begin(9600);
+                       // outside leads to ground and +5V
+
+int val = 0;           // variable to store the value read
+
+
+
+void setup()
+
+{
+
+  Serial.begin(9600);          //  setup serial
+
 }
 
-// filters out changes faster that 5 Hz.
-float filterFrequency = 2.0;  
 
-// create a one pole (RC) lowpass filter
-FilterOnePole lowPassFilter( LOWPASS, filterFrequency );
 
-void loop() {
- int sensorValue = lowPassFilter.input (analogRead(A0));
- Serial.println(sensorValue);
+void loop()
+
+{
+
+  val = analogRead(analogPin);    // read the input pin
+
+  Serial.println(val);             // debug value
+
 }

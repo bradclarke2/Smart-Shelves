@@ -8,13 +8,22 @@ class StockPercentage:
     count =0
 
 def USFullness(shelfHeight, measurementCM):
-    PercFull = measurementCM / shelfHeight
+    if measurementCM > shelfHeight:
+        PercFull = 0
+    else:
+        PercFull = measurementCM / shelfHeight
+        
     if (PercFull < 1/3):
+        print("2")
         return 2
     elif (PercFull < 2/3 and PercFull > 1/3):
+        print("1")
         return 1
+
     elif (PercFull > 2/3):
+        print("0")
         return 0
+
     
 def PRFullness(lumens):
     if (Lumens > 450):
@@ -24,13 +33,11 @@ def PRFullness(lumens):
     elif (PercFull < 100):
         return 0
         
-    
 def CalculateConfidence(shelfHeight, measurementCM, lumens):
     if USFullness(shelfHeight, measurementCM) == PRFullness(lumens):
         return USFullness
     else:
         return -1
-    
     
 def UnitsToFill(singleshelf, ProductList, XYGridList,):
     for product in ProductList:
@@ -58,7 +65,6 @@ def UnitsToFill(singleshelf, ProductList, XYGridList,):
     else:
         singleshelf.unitsOfSpace = unitsOfSpace
     
-
 def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     averagePercentageFullSum = 0 
     for XYGrid in XYGridList:
@@ -94,4 +100,3 @@ def calculateFillListOrder(ShelfList):
     for singleshelf in newlist:
         master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation])
     return master_list
-

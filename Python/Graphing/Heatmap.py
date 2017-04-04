@@ -56,6 +56,9 @@ def MakeHeatMap(singleshelf, XYGridList):
     file_string = "mysite/personal/static/img/UltraSonic" + shelfName + timestamp + ".png"
     fig.savefig(file_string)
     
+    plt.cla()
+    plt.close('all')
+    
     web_string = "img/UltraSonic" + shelfName + timestamp + ".png"
     singleshelf.imglocation = web_string
     
@@ -107,3 +110,6 @@ def MakeSalesGraph(singleshelf):
     
     web_string = "img/StockHistory-" + singleshelf.location + ".png"   
     singleshelf.salesimglocation = web_string
+    
+    plt.cla()
+    plt.close('all')
