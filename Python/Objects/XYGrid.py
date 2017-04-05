@@ -29,7 +29,7 @@ def MakeXYGrid():
     MadeList.append(XYGrid("2R6A", 15, 2, 0))
     MadeList.append(XYGrid("2R6A", 16, 2, 1))
     MadeList.append(XYGrid("2R6A", 17, 2, 2))
-    
+     
     MadeList.append(XYGrid("3L5A", 999, 0, 0))
     MadeList.append(XYGrid("3L5A", 9910, 0, 1))
     MadeList.append(XYGrid("3L5A", 9911, 0, 2)) 
@@ -39,7 +39,7 @@ def MakeXYGrid():
     MadeList.append(XYGrid("3L5A", 9915, 2, 0))
     MadeList.append(XYGrid("3L5A", 9916, 2, 1))
     MadeList.append(XYGrid("3L5A", 9917, 2, 2))
-    
+     
     MadeList.append(XYGrid("4L1B", 999, 0, 0))
     MadeList.append(XYGrid("4L1B", 9910, 0, 1))
     MadeList.append(XYGrid("4L1B", 9911, 0, 2)) 
@@ -49,7 +49,7 @@ def MakeXYGrid():
     MadeList.append(XYGrid("4L1B", 9915, 2, 0))
     MadeList.append(XYGrid("4L1B", 9916, 2, 1))
     MadeList.append(XYGrid("4L1B", 9917, 2, 2))
-    
+     
     MadeList.append(XYGrid("4R4B", 999, 0, 0))
     MadeList.append(XYGrid("4R4B", 9910, 0, 1))
     MadeList.append(XYGrid("4R4B", 9911, 0, 2)) 
@@ -59,7 +59,7 @@ def MakeXYGrid():
     MadeList.append(XYGrid("4R4B", 9915, 2, 0))
     MadeList.append(XYGrid("4R4B", 9916, 2, 1))
     MadeList.append(XYGrid("4R4B", 9917, 2, 2))
-    
+     
     MadeList.append(XYGrid("5L2C", 999, 0, 0))
     MadeList.append(XYGrid("5L2C", 9910, 0, 1))
     MadeList.append(XYGrid("5L2C", 9911, 0, 2)) 
@@ -69,7 +69,7 @@ def MakeXYGrid():
     MadeList.append(XYGrid("5L2C", 9915, 2, 0))
     MadeList.append(XYGrid("5L2C", 9916, 2, 1))
     MadeList.append(XYGrid("5L2C", 9917, 2, 2))
-    
+     
     MadeList.append(XYGrid("6L1D", 999, 0, 0))
     MadeList.append(XYGrid("6L1D", 9910, 0, 1))
     MadeList.append(XYGrid("6L1D", 9911, 0, 2)) 
@@ -79,7 +79,7 @@ def MakeXYGrid():
     MadeList.append(XYGrid("6L1D", 9915, 2, 0))
     MadeList.append(XYGrid("6L1D", 9916, 2, 1))
     MadeList.append(XYGrid("6L1D", 9917, 2, 2))
-    
+     
     MadeList.append(XYGrid("7L2B", 999, 0, 0))
     MadeList.append(XYGrid("7L2B", 9910, 0, 1))
     MadeList.append(XYGrid("7L2B", 9911, 0, 2)) 

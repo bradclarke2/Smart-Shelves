@@ -47,7 +47,7 @@ def startfunction():
                    
                 insertDB.insertShelfRecord(singleshelf)
                 heatmap.MakeSalesGraph(singleshelf)
-            #insertDB.printShelfDB()
+            insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList)
             return prioritisedFillList
          
