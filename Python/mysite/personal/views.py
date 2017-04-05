@@ -1,7 +1,9 @@
 from django.shortcuts import render
-import urllib
 import numpy as np
 from ast import literal_eval as ast
+from django.template.context_processors import request
+import http.client, urllib.request, urllib.parse, urllib.error, base64
+import json
 # Create your views here.
 def index (request):
     try:
@@ -20,8 +22,38 @@ def index (request):
 #     test = content.split('], [')
 #     test = np.asarray(content)
     test = ast(content)
+    counter = 0
+    for c in test:
+        b = c[0]
+        headers = {
+            # Request headers
+            'Ocp-Apim-Subscription-Key': '3ccfc504045b4d9f8f592e8590b1c757',
+        }
+        
+        params = urllib.parse.urlencode({
+            # Request parameters
+            'gtin': b,
+        })
+        
+        try:
+            conn = http.client.HTTPSConnection('dev.tescolabs.com')
+            conn.request("GET", "/product/?%s" % params, "{body}", headers)
+            response = conn.getresponse()
+            data = response.read()
+            print(data)
+            conn.close()
+            parsed_data = json.loads(data)
+            description = parsed_data['products'][0]['description']
+            c[4] = description
+            g = b[-3:]
+            c.append(g)
+        except Exception as e:
+            print("[Errno {0}] {1}".format(e.errno, e.strerror))
+        
+        counter = counter + 1 
+        
                 
-    a = render(request,'personal/basic.html', {'content':test, #[urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()], 
+    a = render(request,'personal/basic.html', {'content':test,#[urllib.request.urlopen("http://127.0.0.1:5000/measurements/").read()], 
 #                                                'shelflocation':[urllib.request.urlopen("http://127.0.0.1:5000/shelflocation/").read()],
 #                                                'pictureregen':urllib.request.urlopen("http://127.0.0.1:5000/pictureregen/")
                                                })

@@ -8,14 +8,14 @@
         <tr class="bg-warning" style="background-color:#e8b70a">
         {% endif %}
           <th scope="row">{{forloop.counter}}</th>
-          <td><img src="https://img.tesco.com/Groceries/pi/988/5000108810988/IDShot_540x540.jpg" class="responsive-img" style='max-height:100px;' alt="face"></td>
-          <td>Quaker Oats</td>
+          <td><img src="https://img.tesco.com/Groceries/pi/{{c.5}}/{{c.0}}/IDShot_540x540.jpg" class="responsive-img" style='max-height:100px;' alt="face"></td>
+          <td>{{c.4}}</td>
           <td>{{c.1}}</td>
           <td>{{c.2}}</td>
           <td>
           {% load static %}
           <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
-          <img src="{% static ""%}{{c.3}}" id="{{c.3}}" class="responsive-img" style='max-height:100px;' alt="face">
+          <img id="imageresource" src="{% static ""%}{{c.3}}" data-img="{% static ""%}{{c.3}}" style='max-height:100px;' alt="face">
           </button>
           </td>
         </tr>
