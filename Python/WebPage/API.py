@@ -43,7 +43,7 @@ def startfunction():
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
                 a = []
-                for b in XYGridList.__iter__(singleshelf.location):
+                for b in XYGridList:
                     b.PRCovered = stockpercentages.CalculateConfidence(singleshelf.height, b.USdistance, b.PRCovered)
                     a.append(b.PRCovered)
                 print("value of a is", a)
