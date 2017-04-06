@@ -9,7 +9,10 @@ Django, Flask, Flask-Restful, Jinja2, Matplotlib, Numpy, Pyserial
 
 ## Instructions on how to use the idea:
 
-Plug in Arduino into the correct port (COM)
+Plug sensors into correct pins
+
+
+ ![alt tag](https://github.dev.global.tesco.org/gce5/Tescos-finest/blob/master/Shelf%20grid.JPG)
 
 Run the server
     python/mysite
