@@ -4,13 +4,14 @@ class Shelf(object):
         self.height = height
         self.width = width
         self.depth = depth
-        self.volumePercentFull = 0
+        self.confidenceLevel = float(0.00) 
         self.areaFull = 0
         self.tpnb = tpnb
         self.unitsOccupied = 0
         self.unitsOfSpace = 0
         self.imglocation = ""
-        self.salesimglocation = ""    
+        self.salesimglocation = ""
+        self.volumePercentFull = 0   
 
 def makeShelfGrid(): 
     MadeList = []

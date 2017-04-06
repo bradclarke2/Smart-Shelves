@@ -9,6 +9,7 @@ import sqlite3
 import CreateDB
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 import json
+from Measurements.MeasureUS import MeasureDistancePR
 
 def startfunction():
     from flask import Flask
@@ -38,11 +39,18 @@ def startfunction():
             ProductList = ProductObject.makeProductGrid()
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
-            for singleshelf in ShelfList:
+            for singleshelf  in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
-                #measureUS.MeasureDistancePR(singleshelf, XYGridList)
-                
-                #stockpercentages.CalculateConfidence(singleshelf.height, measurementCM, lumens)    
+                measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                a = []
+                for b in XYGridList.__iter__(singleshelf.location):
+                    b.PRCovered = stockpercentages.CalculateConfidence(singleshelf.height, b.USdistance, b.PRCovered)
+                    a.append(b.PRCovered)
+                print("value of a is", a)
+                if -1 in a:
+                    singleshelf.confidenceLevel = -1
+                else:
+                    singleshelf.confidenceLevel = 1
                    
                 stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)      
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
@@ -75,33 +83,24 @@ def startfunction():
                 if float(b) < 0.65:
                     numberOfGaps = numberOfGaps + 1
                     
-#             return numberOfGaps
-            pkgarray =[]
-            headers = {
-        # Request headers
-            'Ocp-Apim-Subscription-Key': '3ccfc504045b4d9f8f592e8590b1c757',
-            }
-            gtin = 5052109944841
-            params = urllib.parse.urlencode({
-                # Request parameters
-                'gtin': gtin,
-            })
-            
-            conn = http.client.HTTPSConnection('dev.tescolabs.com')
-            conn.request("GET", "/product/?%s" % params, "{body}", headers)
-            response = conn.getresponse()
-            data = response.read()
-            print(data)
-            conn.close()
-            parsed_data = json.loads(data)
-            description = parsed_data['products'][0]['pkgDimensions'][0]['height']
-            pkgarray.append(description)
-            
-            return pkgarray
+            return numberOfGaps                
+    
+    class photo_resistor(Resource):
+        def get(self):
+            ProductList = ProductObject.makeProductGrid()
+            XYGridList = XYGridObject.MakeXYGrid()
+            ShelfList = ShelfObject.makeShelfGrid()
+            a =[]
+            for singleshelf in ShelfList:
+                MeasureDistancePR(singleshelf, XYGridList)
                 
-         
+            for b in XYGridList:
+                a.append((int(b.PRCovered), stockpercentages.PRFullness(int(b.PRCovered))))
+            return a
+             
     api.add_resource(Departmental_Salary, '/measurements/')
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
+    api.add_resource(photo_resistor, '/pr/')
     
     app.run()
