@@ -13,7 +13,7 @@ def USFullness(shelfHeight, measurementCM):
     else:
         PercFull = (shelfHeight - measurementCM) / shelfHeight
         
-    print("mes=",measurementCM, "%full=",PercFull)
+    #print("mes=",measurementCM, "%full=",PercFull)
         
     if (PercFull < 1/3):
         return 0
