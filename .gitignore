@@ -8,6 +8,8 @@ Python/mysite/personal/__pycache__
 eggs
 *.png
 
+Python/mysite/personal/static/img/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
