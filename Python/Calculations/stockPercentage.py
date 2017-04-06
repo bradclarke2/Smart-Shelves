@@ -11,27 +11,25 @@ def USFullness(shelfHeight, measurementCM):
     if measurementCM > shelfHeight:
         PercFull = 0
     else:
-        PercFull = measurementCM / shelfHeight
+        PercFull = (shelfHeight - measurementCM) / shelfHeight
+        
+    print("mes=",measurementCM, "%full=",PercFull)
         
     if (PercFull < 1/3):
-        print("2")
-        return 2
-    elif (PercFull < 2/3 and PercFull > 1/3):
-        print("1")
-        return 1
-
-    else:
-        print("0")
         return 0
+    elif (PercFull < 2/3 and PercFull > 1/3):
+        return 1
+    else:
+        return 2
 
     
 def PRFullness(lumens):
     if (lumens > 450):
-        return 2
+        return 0
     elif (lumens > 100 and lumens < 450):
         return 1
     else:
-        return 0
+        return 2
         
 def CalculateConfidence(shelfHeight, measurementCM, lumens):
     a = USFullness(shelfHeight, measurementCM)

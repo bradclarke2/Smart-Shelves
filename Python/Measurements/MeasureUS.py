@@ -8,15 +8,15 @@ def MeasureDistanceUS(singleshelf, XYGridList):
         ser = serial.Serial('COM9', 9600)
         ser.readline()
         time.sleep(1)
-         
+          
         waiter = 1
-         
+          
         while waiter == 1:
             line = str(ser.readline(),'utf-8')
             line = line.strip("\r\n")
-             
+              
             print(line)
-             
+              
             if line.startswith("US:"):
                 print("striping...")
                 line = line.strip( 'US:' )
@@ -29,7 +29,7 @@ def MeasureDistanceUS(singleshelf, XYGridList):
         for XYGrid in XYGridList:
             if ( XYGrid.shelflocation == singleshelf.location):
                 XYGrid.USdistance = listData[XYGrid.idpos]
-                print("id=",XYGrid.idpos,"dist=",XYGrid.USdistance)
+                #print("id=",XYGrid.idpos,"dist=",XYGrid.USdistance)
         
     else:   
         for XYGrid in XYGridList:
