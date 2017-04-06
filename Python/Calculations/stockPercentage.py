@@ -109,6 +109,6 @@ def calculateFillListOrder(ShelfList, ProductList):
     
     master_list = []
     for singleshelf in newlist:
-        print("shelf=",singleshelf.location,"score",singleshelf.priorityscore)
+        print("shelf=",singleshelf.location,"%full=",singleshelf.volumePercentFull,"score",singleshelf.priorityscore)
         master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation, singleshelf.confidenceLevel, singleshelf.priorityscore])
     return master_list

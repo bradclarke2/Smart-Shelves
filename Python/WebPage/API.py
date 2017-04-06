@@ -64,10 +64,11 @@ def startfunction():
                     a.append('{0}'.format(row[4])) 
                 count = count + 1
                 
-            a = a[-7:]
+            a = a[-12:]
+            print (a)
             numberOfGaps= 0
             for b in a:
-                if float(b) < 0.65:
+                if float(b) < 0.1:
                     numberOfGaps = numberOfGaps + 1
                     
             return numberOfGaps                
