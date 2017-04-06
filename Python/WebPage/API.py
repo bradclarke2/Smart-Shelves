@@ -5,6 +5,11 @@ import Measurements.MeasureUS as measureUS
 import Graphing.Heatmap as heatmap
 import Objects.product as ProductObject
 import InsertDB as insertDB
+import sqlite3
+import CreateDB
+import http.client, urllib.request, urllib.parse, urllib.error, base64
+import json
+from Measurements.MeasureUS import MeasureDistancePR
 
 def startfunction():
     from flask import Flask
@@ -34,11 +39,18 @@ def startfunction():
             ProductList = ProductObject.makeProductGrid()
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
-            for singleshelf in ShelfList:
+            for singleshelf  in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
-                #measureUS.MeasureDistancePR(singleshelf, XYGridList)
-                
-                #stockpercentages.CalculateConfidence(singleshelf.height, measurementCM, lumens)    
+                measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                a = []
+                for b in XYGridList:
+                    b.PRCovered = stockpercentages.CalculateConfidence(singleshelf.height, b.USdistance, b.PRCovered)
+                    a.append(b.PRCovered)
+                print("value of a is", a)
+                if -1 in a:
+                    singleshelf.confidenceLevel = -1
+                else:
+                    singleshelf.confidenceLevel = 1
                    
                 stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)      
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
@@ -50,8 +62,45 @@ def startfunction():
             insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList)
             return prioritisedFillList
-         
+        
+    class gap_scan(Resource):
+        def get(self):
+            db = sqlite3.connect(CreateDB.dbName)
+            cursor = db.cursor()
+            
+            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp FROM shelfGridTable''')
+            all_rows = cursor.fetchall()
+            count = 0
+            a = []
+            for row in all_rows:
+                if count > (cursor.rowcount-7):
+                    a.append('{0}'.format(row[4])) 
+                count = count + 1
+                
+            a = a[-7:]
+            numberOfGaps= 0
+            for b in a:
+                if float(b) < 0.65:
+                    numberOfGaps = numberOfGaps + 1
+                    
+            return numberOfGaps                
+    
+    class photo_resistor(Resource):
+        def get(self):
+            ProductList = ProductObject.makeProductGrid()
+            XYGridList = XYGridObject.MakeXYGrid()
+            ShelfList = ShelfObject.makeShelfGrid()
+            a =[]
+            for singleshelf in ShelfList:
+                MeasureDistancePR(singleshelf, XYGridList)
+                
+            for b in XYGridList:
+                a.append((int(b.PRCovered), stockpercentages.PRFullness(int(b.PRCovered))))
+            return a
+             
     api.add_resource(Departmental_Salary, '/measurements/')
     api.add_resource(list_priority, '/list/')
+    api.add_resource(gap_scan, '/gap/')
+    api.add_resource(photo_resistor, '/pr/')
     
     app.run()

@@ -69,4 +69,4 @@ def MeasureDistancePR(singleshelf, XYGridList):
     else:
         for XYGrid in XYGridList:
             if ( XYGrid.shelflocation == singleshelf.location):
-                XYGrid.PRCovered = random.random() * 24  
+                XYGrid.PRCovered = random.random() * 1000  

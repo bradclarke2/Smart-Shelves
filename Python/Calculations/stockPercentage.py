@@ -20,22 +20,24 @@ def USFullness(shelfHeight, measurementCM):
         print("1")
         return 1
 
-    elif (PercFull > 2/3):
+    else:
         print("0")
         return 0
 
     
 def PRFullness(lumens):
-    if (Lumens > 450):
+    if (lumens > 450):
         return 2
-    elif (Lumens > 100 and Lumens < 450):
+    elif (lumens > 100 and lumens < 450):
         return 1
-    elif (PercFull < 100):
+    else:
         return 0
         
 def CalculateConfidence(shelfHeight, measurementCM, lumens):
-    if USFullness(shelfHeight, measurementCM) == PRFullness(lumens):
-        return USFullness
+    a = USFullness(shelfHeight, measurementCM)
+    b = PRFullness(lumens)
+    if a == b:
+        return a
     else:
         return -1
     
@@ -98,5 +100,5 @@ def calculateFillListOrder(ShelfList):
     
     master_list = []
     for singleshelf in newlist:
-        master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation])
+        master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation, singleshelf.confidenceLevel])
     return master_list
