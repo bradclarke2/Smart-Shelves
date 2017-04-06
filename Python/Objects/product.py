@@ -2,25 +2,29 @@ import json
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 
 class Product (object): 
-    def __init__(self,name, tpnb, height, width, depth, weight):
+    def __init__(self,name, tpnb, height, width, depth, weight, priority):
         self.name = name
         self.tpnb = tpnb
         self.height = height
         self.width = width
         self.depth = depth
         self.weight = weight
+        self.priority = priority
 
 def makeProductGrid():     
     MadeList = []
-    MadeList.append(Product("Quaker Oats", "5000108810988", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Pancake Mix", "5449000958938", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Cat Food", "8410136002885", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Water 500ml", "5060108450324", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Caviar", "5701263907864", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Dino Prosecco", "5053947211041", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Stawberry Jam", "5000119002501", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Peanuts 200g", "5052109944841", 21.0, 13.0, 8.0, 0.293))
-    #MadeList.append(Product("Kellogs Cornflakes", "050060399", 30, 23, 8, 0.450))
+    MadeList.append(Product("T. British Semi Skimmed Mlk2.272Ltr 4 Pints", "5000436589457", 21.0, 13.0, 8.0, 0.293, 9))
+    MadeList.append(Product("T. Free Range Medium 12 Shipper Eggs", "5051140150471", 21.0, 13.0, 8.0, 0.293, 9))
+    MadeList.append(Product("Hovis Soft White Medium Bread 800G", "5010003000131", 21.0, 13.0, 8.0, 0.293, 9))
+    MadeList.append(Product("Tesco British Mature Cheddar 450G", "5053526716035", 21.0, 13.0, 8.0, 0.293, 6))
+    MadeList.append(Product("Tesco Ripe Bananas 5 Pack", "0000010001875", 21.0, 13.0, 8.0, 0.293, 6))
+    MadeList.append(Product("Dino Prosecco", "5053947211041", 21.0, 13.0, 8.0, 0.293, 5))
+    MadeList.append(Product("Tesco Low Fat Greek Style Yogurt 500G", "5000462416734", 21.0, 13.0, 8.0, 0.293, 5))
+    MadeList.append(Product("Bisto Favourite Gravy Granules 170G", "5010024101381", 21.0, 13.0, 8.0, 0.293, 3))
+    MadeList.append(Product("Haribo Starmix 215G", "5012035936631", 30, 23, 8, 0.450, 3))
+    MadeList.append(Product("T. Eday Value Milk Choc Dgstvebiscuits 300G", "5010204427379", 30, 23, 8, 0.450, 3))
+    MadeList.append(Product("Colgate Advancedwhite Toothpaste100ml", "5000209114510", 30, 23, 8, 0.450, 1))
+    MadeList.append(Product("Tesco Shower Cleaner Spray 500Ml", "5000436725589", 30, 23, 8, 0.450, 1))
     
     for a in MadeList:
         headers = {

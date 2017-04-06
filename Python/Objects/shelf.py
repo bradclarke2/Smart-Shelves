@@ -11,17 +11,21 @@ class Shelf(object):
         self.unitsOfSpace = 0
         self.imglocation = ""
         self.salesimglocation = ""
-        self.volumePercentFull = 0   
+        self.volumePercentFull = 0
+        self.priorityscore = 0   
 
 def makeShelfGrid(): 
     MadeList = []
-    MadeList.append(Shelf("1L4B", 45, 50.0, 20.0, "5000108810988"))
-    MadeList.append(Shelf("2R6A", 45, 50.0, 20.0, "5449000958938"))
-    MadeList.append(Shelf("3L5A", 45, 50.0, 20.0, "8410136002885"))
-    MadeList.append(Shelf("4L1B", 45, 50.0, 20.0, "5060108450324"))
-    MadeList.append(Shelf("4R4B", 45, 50.0, 20.0, "5701263907864"))
+    MadeList.append(Shelf("1L4B", 45, 50.0, 20.0, "5000436589457"))
+    MadeList.append(Shelf("2R6A", 45, 50.0, 20.0, "5051140150471"))
+    MadeList.append(Shelf("3L5A", 45, 50.0, 20.0, "5010003000131"))
+    MadeList.append(Shelf("4L1B", 45, 50.0, 20.0, "5053526716035"))
+    MadeList.append(Shelf("4R4B", 45, 50.0, 20.0, "0000010001875"))
     MadeList.append(Shelf("5L2C", 45, 50.0, 20.0, "5053947211041"))
-    MadeList.append(Shelf("6L1D", 45, 50.0, 20.0, "5000119002501"))
-    MadeList.append(Shelf("7L2B", 45, 50.0, 20.0, "5052109944841"))
-
+    MadeList.append(Shelf("6L1D", 45, 50.0, 20.0, "5000462416734"))
+    MadeList.append(Shelf("7L2B", 45, 50.0, 20.0, "5010024101381"))
+    MadeList.append(Shelf("8L2B", 45, 50.0, 20.0, "5012035936631"))
+    MadeList.append(Shelf("9L2B", 45, 50.0, 20.0, "5010204427379"))
+    MadeList.append(Shelf("10L2B", 45, 50.0, 20.0, "5000209114510"))
+    MadeList.append(Shelf("11L2B", 45, 50.0, 20.0, "5000436725589"))
     return MadeList
