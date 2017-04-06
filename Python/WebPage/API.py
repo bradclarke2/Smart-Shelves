@@ -62,6 +62,7 @@ def startfunction():
                 count = count + 1
                 
             a = a[-7:]
+            print (a)
             numberOfGaps= 0
             for b in a:
                 if float(b) < 0.65:
