@@ -27,8 +27,9 @@ def startfunction():
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
                 a = []
                 for b in XYGridList:
-                    b.PRCovered = stockpercentages.CalculateConfidence(singleshelf.height, b.USdistance, b.PRCovered)
-                    a.append(b.PRCovered)
+                    if b.shelflocation == singleshelf.location:
+                        c = stockpercentages.CalculateConfidence(singleshelf.height, b.USdistance, b.PRCovered)
+                        a.append(c)
                 print("value of a is", a)
                 if -1 in a:
                     singleshelf.confidenceLevel = -1
