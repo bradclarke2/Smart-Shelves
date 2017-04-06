@@ -13,7 +13,7 @@ class Product (object):
 def makeProductGrid():     
     MadeList = []
     MadeList.append(Product("Quaker Oats", "5000108810988", 21.0, 13.0, 8.0, 0.293))
-    MadeList.append(Product("Pancake Mix", "0000003265314", 21.0, 13.0, 8.0, 0.293))
+    MadeList.append(Product("Pancake Mix", "5449000958938", 21.0, 13.0, 8.0, 0.293))
     MadeList.append(Product("Cat Food", "8410136002885", 21.0, 13.0, 8.0, 0.293))
     MadeList.append(Product("Water 500ml", "5060108450324", 21.0, 13.0, 8.0, 0.293))
     MadeList.append(Product("Caviar", "5701263907864", 21.0, 13.0, 8.0, 0.293))
