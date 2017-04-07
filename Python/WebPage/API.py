@@ -82,9 +82,17 @@ def startfunction():
             for b in XYGridList:
                 a.append((int(b.PRCovered), stockpercentages.PRFullness(int(b.PRCovered))))
             return a
+    
+    class stock_graph(Resource):
+        def get(self):
+            
+            a = "img/StockHistory-15R2A.png"
+            
+            return a
 
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
     api.add_resource(photo_resistor, '/pr/')
+    api.add_resource(stock_graph, '/stock/')
     
     app.run()

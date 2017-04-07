@@ -11,5 +11,7 @@ def createDB():
     
     cursor.execute('''
         CREATE TABLE shelfGridTable(id INTEGER PRIMARY KEY, shelfLocation TEXT, TPNB TEXT, 
-            unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT) ''')
+            unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT, stockgraph TEXT, priorityscore INTEGER) ''')
     db.commit()
+    
+createDB()

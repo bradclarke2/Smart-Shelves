@@ -1,28 +1,17 @@
-import random
+import sqlite3
 
-fullness = random.randint(0,2)
-            
-if fullness == 0:
-    range_min = 0
-    range_max = 14
-if fullness == 1:
-    range_min = 16
-    range_max = 29
-if fullness == 2:
-    range_min = 30
-    range_max = 45
-    
-print("fullness=",fullness,"rangemin=",range_min,"rangemax=",range_max)
+dbName = "Database\\database.db"
 
-for i in range (0,9):
-    rand = random.randint(range_min, range_max)
-    PercFull = (45 - rand) / 45
+def createDB():
+    # Creates or opens a file called mydb with a SQLite3 DB
+    db = sqlite3.connect(dbName)
     
-    if (PercFull < 1/3):
-        res= 0
-    elif (PercFull < 2/3 and PercFull > 1/3):
-        res= 1
-    else:
-        res= 2
+    # Get a cursor object
+    cursor = db.cursor()
     
-    print("rand=",rand,"res=",res)
+    cursor.execute('''
+        CREATE TABLE shelfGridTable(id INTEGER PRIMARY KEY, shelfLocation TEXT, TPNB TEXT, 
+            unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT, stockgraph TEXT, priorityscore INTEGER) ''')
+    db.commit()
+    
+createDB()
