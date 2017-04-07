@@ -105,7 +105,7 @@ def MakeSalesGraph(singleshelf):
     
     ax.xaxis.set_tick_params(which='major', pad=30)
     
-    file_string = "mysite/personal/static/img/StockHistory-" + singleshelf.location + ".png"
+    file_string = "mysite/graph/static/img/StockHistory-" + singleshelf.location + ".png"
     fig.savefig(file_string)
     
     web_string = "img/StockHistory-" + singleshelf.location + ".png"   

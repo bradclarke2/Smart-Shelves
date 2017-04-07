@@ -14,4 +14,3 @@ def createDB():
             unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT, stockgraph TEXT, priorityscore INTEGER) ''')
     db.commit()
     
-createDB()

@@ -5,7 +5,7 @@ import urllib
 # Create your views here.
 def index(request):
     try:
-        content = urllib.request.urlopen("http://127.0.0.1:5000/gap/").read()
+        content = urllib.request.urlopen("http://127.0.0.1:5000/stock/").read()
     except urllib.error.HTTPError as err:
         if err.code == 500:
             content = "not found"
@@ -17,4 +17,4 @@ def index(request):
     except urllib.error.URLError as err:
         print ("Some other error happened:", err.reason)
     
-    return render(request,'personal/test.html',{'welcome':HttpResponse("<h2>HEY!</h2>")})
+    return render(request,'personal/test.html',{'stock':content})

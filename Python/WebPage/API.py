@@ -42,10 +42,11 @@ def startfunction():
                 
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
                 
-                heatmap.MakeHeatMap(singleshelf, XYGridList)           
-                   
+                heatmap.MakeHeatMap(singleshelf, XYGridList)                           
                 insertDB.insertShelfRecord(singleshelf)
                 heatmap.MakeSalesGraph(singleshelf)
+                
+                insertDB.printShelfDB()            
             #insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
@@ -89,9 +90,25 @@ def startfunction():
     class stock_graph(Resource):
         def get(self):
             
-            a = "img/StockHistory-15R2A.png"
+            db = sqlite3.connect(CreateDB.dbName)
+            cursor = db.cursor()
             
-            return a
+            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp, stockgraph, priorityscore FROM shelfGridTable''')
+            all_rows = cursor.fetchall()
+            a = []
+            
+            for row in all_rows:
+                a.append('{0}'.format(row[1]))
+                
+            b = "img/StockHistory-15R2A.png"
+            a = a[-12:]
+            print (a)
+            c=[]
+            
+            for shelfLocation in a:
+                c.append("img/StockHistory-" + shelfLocation + ".png")
+            
+            return c
 
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
