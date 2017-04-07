@@ -1,5 +1,11 @@
 import json
 import http.client, urllib.request, urllib.parse, urllib.error, base64
+from configparser import SafeConfigParser
+from mysite.personal import test2 as key
+
+parser = SafeConfigParser()
+parser.read('keys.ini')
+APIkey = parser.get('credentials', 'APIkey')
 
 class Product (object): 
     def __init__(self,name, tpnb, height, width, depth, weight, priority):
@@ -10,6 +16,14 @@ class Product (object):
         self.depth = depth
         self.weight = weight
         self.priority = priority
+        
+def getVarFromFile(filename):
+    import imp
+    f = open(filename)
+    global data
+    data = imp.load_source('data', '', f)
+    f.close()
+
 
 def makeProductGrid():     
     MadeList = []
@@ -26,10 +40,14 @@ def makeProductGrid():
     MadeList.append(Product("Colgate Advancedwhite Toothpaste100ml", "5000209114510", 30, 23, 8, 0.450, 1))
     MadeList.append(Product("Tesco Shower Cleaner Spray 500Ml", "5000436725589", 30, 23, 8, 0.450, 1))
     
+#     parser = SafeConfigParser()
+#     parser.read('keys.ini')
+    APIkey = key.api
+
     for a in MadeList:
         headers = {
             # Request headers
-            'Ocp-Apim-Subscription-Key': '3ccfc504045b4d9f8f592e8590b1c757',
+            'Ocp-Apim-Subscription-Key': APIkey,
         }
         gtin = a.tpnb
         params = urllib.parse.urlencode({

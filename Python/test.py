@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import sqlite3
 
 dbName = "Database\\database.db"
@@ -15,3 +16,12 @@ def createDB():
     db.commit()
     
 createDB()
+=======
+from configparser import SafeConfigParser
+
+parser = SafeConfigParser()
+parser.read('example.ini')
+
+key = parser.get('credentials', 'APIkey')
+print(key)
+>>>>>>> e05e9cfa9027e2f506f9de394851179579bcd6b9

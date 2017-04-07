@@ -5,7 +5,7 @@ import Calculations.stockPercentage as stockpercentages
 
 def MeasureDistanceUS(singleshelf, XYGridList):
     
-    if singleshelf.location == "1111L4B":
+    if singleshelf.location == "1L4B":
         ser = serial.Serial('COM9', 9600)
         ser.readline()
         time.sleep(1)
