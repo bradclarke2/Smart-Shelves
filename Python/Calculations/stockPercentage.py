@@ -91,12 +91,24 @@ def ShelfOccupiedVolume (singleShelf):
     OccupiedVolume = singleShelf.volumePercentFull * shelfVolume
     return OccupiedVolume
 
-def calculateFillListOrder(ShelfList):
-    newlist = sorted(ShelfList, key=lambda x: x.unitsOfSpace, reverse=True)
+def GetProductPriorty(singleshelf, ProductList):
+    for product in ProductList:
+        if product.tpnb == singleshelf.tpnb:
+            return product.priority
+    return 0
+    
+
+def calculateFillListOrder(ShelfList, ProductList):
+    for shelf in ShelfList:
+        shelf.priorityscore = GetProductPriorty(shelf, ProductList) * shelf.unitsOfSpace
+    
+    #newlist = sorted(ShelfList, key=lambda x: (x.unitsOfSpace, reverse=True, ))
+    newlist = sorted(ShelfList, key=lambda x: (-x.priorityscore, -x.unitsOfSpace))
     print("orig=", ShelfList)
     print("ordered=", newlist)
     
     master_list = []
     for singleshelf in newlist:
-        master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation, singleshelf.confidenceLevel])
+        print("shelf=",singleshelf.location,"%full=",singleshelf.volumePercentFull,"score",singleshelf.priorityscore)
+        master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation, singleshelf.confidenceLevel, singleshelf.priorityscore])
     return master_list

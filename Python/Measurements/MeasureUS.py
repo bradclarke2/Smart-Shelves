@@ -5,7 +5,7 @@ import Calculations.stockPercentage as stockpercentages
 
 def MeasureDistanceUS(singleshelf, XYGridList):
     
-    if singleshelf.location == "11L4B":
+    if singleshelf.location == "1111L4B":
         ser = serial.Serial('COM9', 9600)
         ser.readline()
         time.sleep(1)
@@ -60,9 +60,7 @@ def MeasureDistanceUS(singleshelf, XYGridList):
             if fullness == 4:
                 range_min = 31.0
                 range_max = 45.0
-                
-            print("fullness=",fullness,"rangemin=",range_min,"rangemax=",range_max)
-                
+                   
             if ( XYGrid.shelflocation == singleshelf.location):
                 rand = random.uniform(range_min, range_max)
                 print("rand=",rand,"res=",stockpercentages.USFullness(45, rand))

@@ -36,7 +36,10 @@ def startfunction():
                 else:
                     singleshelf.confidenceLevel = 1
                    
-                stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)      
+                stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)    
+                 
+                print("pri=",stockpercentages.GetProductPriorty(singleshelf, ProductList))    
+                
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
                 
                 heatmap.MakeHeatMap(singleshelf, XYGridList)           
@@ -44,7 +47,7 @@ def startfunction():
                 insertDB.insertShelfRecord(singleshelf)
                 heatmap.MakeSalesGraph(singleshelf)
             #insertDB.printShelfDB()
-            prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList)
+            prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
         
     class gap_scan(Resource):
@@ -61,11 +64,11 @@ def startfunction():
                     a.append('{0}'.format(row[4])) 
                 count = count + 1
                 
-            a = a[-7:]
+            a = a[-12:]
             print (a)
             numberOfGaps= 0
             for b in a:
-                if float(b) < 0.65:
+                if float(b) < 0.1:
                     numberOfGaps = numberOfGaps + 1
                     
             return numberOfGaps                
