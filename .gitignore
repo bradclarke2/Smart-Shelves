@@ -3,10 +3,13 @@ __pycache__/
 Python/Database
 Python/.metadata
 Python/mysite/personal/__pycache__
+Python/keys.ini
 *.pyc
 *.pyo
 eggs
 *.png
+
+
 
 Python/mysite/personal/static/img/
 
