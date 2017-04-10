@@ -1,10 +1,17 @@
-from configparser import SafeConfigParser
-import os
+import sqlite3
 
-parser = SafeConfigParser()
-parser.read('keys.ini')
+dbName = "Database\\database.db"
 
-print(os.path.abspath('keys.ini'))
-
-key = parser.get('credentials', 'APIkey')
-print(key)
+def createDB():
+    # Creates or opens a file called mydb with a SQLite3 DB
+    db = sqlite3.connect(dbName)
+    
+    # Get a cursor object
+    cursor = db.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE shelfGridTable(id INTEGER PRIMARY KEY, shelfLocation TEXT, TPNB TEXT, 
+            unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT, stockgraph TEXT, priorityscore INTEGER) ''')
+    db.commit()
+    
+createDB()

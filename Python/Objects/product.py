@@ -1,7 +1,9 @@
 import json
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 from configparser import SafeConfigParser
+from mysite.personal import test2 as key
 
+APIkey = key.api
 
 class Product (object): 
     def __init__(self,name, tpnb, height, width, depth, weight, priority):
@@ -36,9 +38,9 @@ def makeProductGrid():
     MadeList.append(Product("Colgate Advancedwhite Toothpaste100ml", "5000209114510", 30, 23, 8, 0.450, 1))
     MadeList.append(Product("Tesco Shower Cleaner Spray 500Ml", "5000436725589", 30, 23, 8, 0.450, 1))
     
-    parser = SafeConfigParser()
-    parser.read('keys.ini')
-    APIkey = parser.get('credentials', 'APIkey')
+#     parser = SafeConfigParser()
+#     parser.read('keys.ini')
+    APIkey = key.api
 
     for a in MadeList:
         headers = {
@@ -62,5 +64,4 @@ def makeProductGrid():
         a.depth = parsed_data['products'][0]['pkgDimensions'][0]['depth']
         a.weight = parsed_data['products'][0]['pkgDimensions'][0]['weight']
      
-        print("product dimension are", a.height )
     return MadeList

@@ -3,6 +3,7 @@ __pycache__/
 Python/Database
 Python/.metadata
 Python/mysite/personal/__pycache__
+Python/mysite/personal/test2.py
 Python/keys.ini
 *.pyc
 *.pyo

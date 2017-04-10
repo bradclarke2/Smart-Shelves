@@ -1,19 +1,8 @@
-import json
-from Main.JordanAsad import shelfHeight
-
-class StockPercentage:
-    percentage = 0
-    ifFull = "Looking Good!"
-    ifEmpty = "Fill me UP!"
-    count =0
-
 def USFullness(shelfHeight, measurementCM):
     if measurementCM > shelfHeight:
         PercFull = 0
     else:
         PercFull = (shelfHeight - measurementCM) / shelfHeight
-        
-    #print("mes=",measurementCM, "%full=",PercFull)
         
     if (PercFull < 1/3):
         return 0
@@ -22,7 +11,6 @@ def USFullness(shelfHeight, measurementCM):
     else:
         return 2
 
-    
 def PRFullness(lumens):
     if (lumens > 450):
         return 0
@@ -64,6 +52,7 @@ def UnitsToFill(singleshelf, ProductList, XYGridList,):
         singleshelf.unitsOfSpace = 0
     else:
         singleshelf.unitsOfSpace = unitsOfSpace
+    singleshelf.priorityscore = GetProductPriorty(singleshelf, ProductList) * singleshelf.unitsOfSpace
     
 def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     averagePercentageFullSum = 0 
@@ -72,9 +61,7 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
             sensorMeasurement = XYGrid.USdistance
             percentageFull = 1 - ( (sensorMeasurement - 4) /shelfHeight)  
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
-    print("avg%fullsum=", averagePercentageFullSum)
     averagePercentageFull =round((averagePercentageFullSum /9),2)
-    print(averagePercentageFull, "= abg percent full")
     if averagePercentageFull < 0.005 and averagePercentageFull > -0.05:
         averagePercentageFull = 0
     return averagePercentageFull
@@ -82,7 +69,6 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
 def ShelfAvailableVolume (singleShelf):
     shelfVolume = singleShelf.height * singleShelf.width * singleShelf.depth
     OccupiedVolume = singleShelf.volumePercentFull * shelfVolume
-    print(singleShelf.location, "volume = ", shelfVolume, "volpercenfull=", singleShelf.volumePercentFull, "occupiedvolume=", OccupiedVolume)
     AvailableVolume = shelfVolume - OccupiedVolume
     return AvailableVolume
 
@@ -92,23 +78,33 @@ def ShelfOccupiedVolume (singleShelf):
     return OccupiedVolume
 
 def GetProductPriorty(singleshelf, ProductList):
+    
+
     for product in ProductList:
         if product.tpnb == singleshelf.tpnb:
             return product.priority
     return 0
     
-
 def calculateFillListOrder(ShelfList, ProductList):
-    for shelf in ShelfList:
-        shelf.priorityscore = GetProductPriorty(shelf, ProductList) * shelf.unitsOfSpace
     
-    #newlist = sorted(ShelfList, key=lambda x: (x.unitsOfSpace, reverse=True, ))
+#     db = sqlite3.connect(CreateDB.dbName)
+#     cursor = db.cursor()
+#             
+#     cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp FROM shelfGridTable''')
+#     all_rows = cursor.fetchall()
+#     count = 0
+#     a = []
+#     for row in all_rows:
+#         if count > (cursor.rowcount-7):
+#             print('{0} : {1}, {2}, {3}, {4}'.format(row[0], row[1], row[2], row[3], row[4]))
+#             test = ('{0}, {1}, {2}, {3}, {4}'.format(row[0], row[1], row[2], row[3], row[4]))
+#             test2 = test.split(',')
+#             a.append(test2)
+#         count = count + 1
+#    print ("a-",a)      
+
     newlist = sorted(ShelfList, key=lambda x: (-x.priorityscore, -x.unitsOfSpace))
-    print("orig=", ShelfList)
-    print("ordered=", newlist)
-    
     master_list = []
     for singleshelf in newlist:
-        print("shelf=",singleshelf.location,"%full=",singleshelf.volumePercentFull,"score",singleshelf.priorityscore)
         master_list.append([singleshelf.tpnb, singleshelf.location, singleshelf.unitsOfSpace, singleshelf.imglocation, singleshelf.salesimglocation, singleshelf.confidenceLevel, singleshelf.priorityscore])
     return master_list

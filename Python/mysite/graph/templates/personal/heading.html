@@ -52,24 +52,32 @@
 		  
 			<div class='container-fluid'>
 			</div>
-		  </div>
+		  
 		    <div class="row">
               <div class="col-sm-2">
                   <br>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-10">
+              <table class="table">
+					<br><br>
+					  <thead>
+					    <tr>
+					      <th>Item</th>
+					      <th>Image</th>
+					      <th>Location</th>
+					      <th>Stock Graph</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    {% block content %}
+                		{% endblock %}
+					  </tbody>
+					</table>	
                   <br>
-                  <center>
-                  <img src="{% static 'img/StockHistory-15R2A.png' %}" class="responsive-img" style='max-height:500px;' alt="face">
-                  </center>
+                  </div>
         </div><hr>
 		</div> 
 	</div>
-	<footer>
-		<div class="container-fluid" style='margin-left:15px'>
-			<p><a href="#" target="blank">Contact</a> | <a href="#" target="blank">LinkedIn</a> | <a href="#" target="blank">Twitter</a> | <a href="#" target="blank">Google+</a></p>
-		</div>
-	</footer>	
 	
 </body>
 

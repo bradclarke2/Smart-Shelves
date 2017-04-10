@@ -18,12 +18,9 @@ def MakeHeatMap(singleshelf, XYGridList):
         for j in range(0,3):
             for XYGrid in XYGridList:
                 if (XYGrid.xpos == i and XYGrid.ypos == j and XYGrid.shelflocation == shelfName):
-                    print("xpos=",XYGrid.xpos,"ypos=",XYGrid.ypos,"loc=",shelfName,"dist=",XYGrid.USdistance,"res=",stockpercentages.USFullness(shelfHeight, XYGrid.USdistance))
                     Ztemp.append(stockpercentages.USFullness(shelfHeight, XYGrid.USdistance))
         i = i - 1
         Z_dat.append(Ztemp)
-    
-    print(Z_dat)
     
     cMap = ListedColormap(['red', 'yellow', 'green'])
     fig, ax = plt.subplots()
@@ -82,10 +79,8 @@ def MakeSalesGraph(singleshelf):
         y.append(all_rows[a][3])
         if x_min == 0 or x_reformated < x_min:
             x_min = x_reformated
-            #print("new min = ", x_min)
         if x_max == 0 or x_reformated > x_max:
             x_max = x_reformated
-            #print("new max = ", x_max)
         
     fig, ax = plt.subplots()
     
@@ -105,7 +100,7 @@ def MakeSalesGraph(singleshelf):
     
     ax.xaxis.set_tick_params(which='major', pad=30)
     
-    file_string = "mysite/personal/static/img/StockHistory-" + singleshelf.location + ".png"
+    file_string = "mysite/graph/static/img/StockHistory-" + singleshelf.location + ".png"
     fig.savefig(file_string)
     
     web_string = "img/StockHistory-" + singleshelf.location + ".png"   

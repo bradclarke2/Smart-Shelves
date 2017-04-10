@@ -4,6 +4,8 @@ from ast import literal_eval as ast
 from django.template.context_processors import request
 import http.client, urllib.request, urllib.parse, urllib.error, base64
 import json
+from . import test2 as key
+
 # Create your views here.
 def index (request):
     try:
@@ -23,11 +25,14 @@ def index (request):
 #     test = np.asarray(content)
     test = ast(content)
     counter = 0
+    
+    APIkey = key.api
+    
     for c in test:
         b = c[0]
         headers = {
             # Request headers
-            'Ocp-Apim-Subscription-Key': '3ccfc504045b4d9f8f592e8590b1c757',
+            'Ocp-Apim-Subscription-Key': APIkey,
         }
         
         params = urllib.parse.urlencode({

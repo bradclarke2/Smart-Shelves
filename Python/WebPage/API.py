@@ -37,15 +37,13 @@ def startfunction():
                     singleshelf.confidenceLevel = 1
                    
                 stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)    
-                 
-                print("pri=",stockpercentages.GetProductPriorty(singleshelf, ProductList))    
                 
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
                 
-                heatmap.MakeHeatMap(singleshelf, XYGridList)           
-                   
+                heatmap.MakeHeatMap(singleshelf, XYGridList)                           
                 insertDB.insertShelfRecord(singleshelf)
                 heatmap.MakeSalesGraph(singleshelf)
+                       
             #insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
@@ -65,7 +63,6 @@ def startfunction():
                 count = count + 1
                 
             a = a[-12:]
-            print (a)
             numberOfGaps= 0
             for b in a:
                 if float(b) < 0.1:
@@ -85,9 +82,32 @@ def startfunction():
             for b in XYGridList:
                 a.append((int(b.PRCovered), stockpercentages.PRFullness(int(b.PRCovered))))
             return a
+    
+    class stock_graph(Resource):
+        def get(self):
+            
+            db = sqlite3.connect(CreateDB.dbName)
+            cursor = db.cursor()
+            
+            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp, stockgraph, priorityscore FROM shelfGridTable''')
+            all_rows = cursor.fetchall()
+            a = []
+            
+            for row in all_rows:
+                a.append('{0}'.format(row[1]))
+                
+            b = "img/StockHistory-15R2A.png"
+            a = a[-12:]
+            c=[]
+            
+            for shelfLocation in a:
+                c.append("img/StockHistory-" + shelfLocation + ".png")
+            
+            return c
 
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
     api.add_resource(photo_resistor, '/pr/')
+    api.add_resource(stock_graph, '/stock/')
     
     app.run()

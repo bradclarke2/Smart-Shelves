@@ -5,7 +5,7 @@ import Calculations.stockPercentage as stockpercentages
 
 def MeasureDistanceUS(singleshelf, XYGridList):
     
-    if singleshelf.location == "1111L4B":
+    if singleshelf.location == "1L4B":
         ser = serial.Serial('COM9', 9600)
         ser.readline()
         time.sleep(1)
@@ -16,21 +16,16 @@ def MeasureDistanceUS(singleshelf, XYGridList):
             line = str(ser.readline(),'utf-8')
             line = line.strip("\r\n")
               
-            print(line)
-              
             if line.startswith("US:"):
-                #print("striping...")
                 line = line.strip( 'US:' )
                 line = line.strip("\r\n")
                 listData = line.split(",")    
-                #print("line=",listData)
                 listData = [float(i) for i in listData]
                 waiter = 0  
               
         for XYGrid in XYGridList:
             if ( XYGrid.shelflocation == singleshelf.location):
                 XYGrid.USdistance = listData[XYGrid.idpos]
-                #print("id=",XYGrid.idpos,"dist=",XYGrid.USdistance)
         
     else:   
         fullness = random.randint(0,2)
@@ -63,12 +58,11 @@ def MeasureDistanceUS(singleshelf, XYGridList):
                    
             if ( XYGrid.shelflocation == singleshelf.location):
                 rand = random.uniform(range_min, range_max)
-                print("rand=",rand,"res=",stockpercentages.USFullness(45, rand))
                 XYGrid.USdistance = rand
              
 def MeasureDistancePR(singleshelf, XYGridList):
     
-    if singleshelf.location == "111L4B":
+    if singleshelf.location == "1L4B":
         ser = serial.Serial('COM9', 9600)
         ser.readline()
         time.sleep(1)
@@ -78,23 +72,17 @@ def MeasureDistancePR(singleshelf, XYGridList):
         while waiter == 1:
             line = str(ser.readline(),'utf-8')
             line = line.strip("\r\n")
-            
-            print(line)
              
             if line.startswith("PR:"):
-                print("striping...")
                 line = line.strip( 'PR:' )
                 line = line.strip("\r\n")
                 listData = line.split(",")    
-                print("line=",listData)
                 listData = [float(i) for i in listData]
                 waiter = 0  
               
         for XYGrid in XYGridList:
             if ( XYGrid.shelflocation == singleshelf.location):
-                XYGrid.PRCovered = listData[XYGrid.idpos]
-                print("id=",XYGrid.idpos,"dist=",XYGrid.PRCovered)
-        
+                XYGrid.PRCovered = listData[XYGrid.idpos]     
         
     else:
         for XYGrid in XYGridList:
