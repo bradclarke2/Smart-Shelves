@@ -43,7 +43,7 @@ def startfunction():
                 heatmap.MakeHeatMap(singleshelf, XYGridList)                           
                 insertDB.insertShelfRecord(singleshelf)
                 heatmap.MakeSalesGraph(singleshelf)
-                       
+
             #insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
@@ -94,14 +94,13 @@ def startfunction():
             a = []
             
             for row in all_rows:
-                a.append('{0}'.format(row[1]))
-                
-            b = "img/StockHistory-15R2A.png"
+                a.append([row[1], row[2]])
+                              
             a = a[-12:]
             c=[]
             
             for shelfLocation in a:
-                c.append("img/StockHistory-" + shelfLocation + ".png")
+                c.append(["img/StockHistory-" + shelfLocation[0] + ".png", shelfLocation[1], shelfLocation[0]])
             
             return c
 
