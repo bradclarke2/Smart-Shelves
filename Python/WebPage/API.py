@@ -8,6 +8,13 @@ import InsertDB as insertDB
 import sqlite3
 import CreateDB
 from Measurements.MeasureUS import MeasureDistancePR
+import threading
+import multiprocessing as mp
+
+def makingGraphs(singleshelf, XYGridList):                    
+    heatmap.MakeHeatMap(singleshelf, XYGridList)                           
+    insertDB.insertShelfRecord(singleshelf)
+    heatmap.MakeSalesGraph(singleshelf)
 
 def startfunction():
     from flask import Flask
@@ -20,6 +27,9 @@ def startfunction():
             ProductList = ProductObject.makeProductGrid()
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
+            threads = []
+            t=[]
+            count = 0
             for singleshelf  in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
@@ -37,12 +47,19 @@ def startfunction():
                 stockpercentages.UnitsToFill(singleshelf, ProductList, XYGridList)    
                 
                 print(singleshelf.location, "is", singleshelf.volumePercentFull*100, "% full and can fit", singleshelf.unitsOfSpace, "more units of X")
+                makingGraphs(singleshelf, XYGridList)
+                putOnCore = mp.Process(target = makingGraphs, args = (singleshelf, XYGridList))
+                putOnCore.start()
+#                 threads.append(mp.Process(target = makingGraphs, args = (singleshelf, XYGridList)))
+#                 t.append(threads[count])
+#                 
+#                 count = count + 1
+#             for c in threads:
+#                 c.start()    
+#             #insertDB.printShelfDB()
+#             for x in threads:
+#                 x.join()
                 
-                heatmap.MakeHeatMap(singleshelf, XYGridList)                           
-                insertDB.insertShelfRecord(singleshelf)
-                heatmap.MakeSalesGraph(singleshelf)
-
-            #insertDB.printShelfDB()
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
         

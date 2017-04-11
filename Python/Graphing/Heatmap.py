@@ -1,3 +1,5 @@
+import matplotlib 
+matplotlib.use("TkAgg")
 import Calculations.stockPercentage as stockpercentages
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
@@ -6,6 +8,7 @@ import datetime
 import sqlite3
 import CreateDB
 from matplotlib import dates
+
 
 def MakeHeatMap(singleshelf, XYGridList):
     shelfHeight = singleshelf.height
