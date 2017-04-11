@@ -25,7 +25,7 @@ def getVarFromFile(filename):
 
 def makeProductGrid():     
     MadeList = []
-    MadeList.append(Product("T. British Semi Skimmed Mlk2.272Ltr 4 Pints", "5000436589457", 21.0, 13.0, 8.0, 0.293, 9))
+    MadeList.append(Product("T. British Semi Skimmed Mlk2.272Ltr 4 Pints", "5053827141529", 21.0, 13.0, 8.0, 0.293, 9))
     MadeList.append(Product("T. Free Range Medium 12 Shipper Eggs", "5051140150471", 21.0, 13.0, 8.0, 0.293, 9))
     MadeList.append(Product("Hovis Soft White Medium Bread 800G", "5010003000131", 21.0, 13.0, 8.0, 0.293, 9))
     MadeList.append(Product("Tesco British Mature Cheddar 450G", "5053526716035", 21.0, 13.0, 8.0, 0.293, 6))

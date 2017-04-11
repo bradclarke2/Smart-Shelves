@@ -37,7 +37,7 @@ def readSerialPR(waiter, XYGridList, singleshelf, ser):
                 listData = line.split(",")    
                 listData = [float(i) for i in listData]
                 waiter = 0  
-              
+                
             for XYGrid in XYGridList:
                 if ( XYGrid.shelflocation == singleshelf.location):
                     XYGrid.PRCovered = listData[XYGrid.idpos]

@@ -7,8 +7,6 @@ import Objects.product as ProductObject
 import InsertDB as insertDB
 import sqlite3
 import CreateDB
-import http.client, urllib.request, urllib.parse, urllib.error, base64
-import json
 from Measurements.MeasureUS import MeasureDistancePR
 import threading
 import multiprocessing as mp
