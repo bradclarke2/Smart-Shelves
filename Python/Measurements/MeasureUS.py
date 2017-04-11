@@ -25,6 +25,7 @@ def MeasureDistanceUS(singleshelf, XYGridList):
               
         for XYGrid in XYGridList:
             if ( XYGrid.shelflocation == singleshelf.location):
+                print(listData[XYGrid.idpos])
                 XYGrid.USdistance = listData[XYGrid.idpos]
         
     else:   
