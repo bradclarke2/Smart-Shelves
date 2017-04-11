@@ -5,19 +5,26 @@ import Calculations.stockPercentage as stockpercentages
 
 def readSerialUS(waiter, XYGridList, singleshelf, ser):
     while waiter == 1:
-            line = str(ser.readline(),'utf-8')
-            line = line.strip("\r\n")
-              
-            if line.startswith("US:"):
-                line = line.strip( 'US:' )
+        while True:
+            try:
+                line = str(ser.readline(),'utf-8')
                 line = line.strip("\r\n")
-                listData = line.split(",")    
-                listData = [float(i) for i in listData]
-                waiter = 0  
-              
-            for XYGrid in XYGridList:
-                if ( XYGrid.shelflocation == singleshelf.location):
-                    XYGrid.USdistance = listData[XYGrid.idpos]
+                  
+                if line.startswith("US:"):
+                    line = line.strip( 'US:' )
+                    line = line.strip("\r\n")
+                    listData = line.split(",")    
+                    listData = [float(i) for i in listData]
+                    waiter = 0  
+                  
+                for XYGrid in XYGridList:
+                    if ( XYGrid.shelflocation == singleshelf.location):
+                        XYGrid.USdistance = listData[XYGrid.idpos]
+                break
+            except UnboundLocalError as err:
+                continue
+            except ValueError as err:
+                continue
 
 def readSerialPR(waiter, XYGridList, singleshelf, ser):
     while waiter == 1:
