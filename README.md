@@ -7,7 +7,7 @@ Python 3.6, Arduino IDE, Django, Bootstrap,
 ## Python Packages needed:
 Django, Flask, Flask-Restful, Jinja2, Matplotlib, Numpy, Pyserial
 
-## Instructions on how to use the idea:
+## How to set up the Smart Shelves:
 
 Plug sensors into correct pins
 
