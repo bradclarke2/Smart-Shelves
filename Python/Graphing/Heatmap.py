@@ -103,10 +103,13 @@ def MakeSalesGraph(singleshelf):
     
     ax.xaxis.set_tick_params(which='major', pad=30)
     
-    file_string = "mysite/graph/static/img/StockHistory-" + singleshelf.location + ".png"
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+    
+    file_string = "mysite/graph/static/img/StockHistory-" + singleshelf.location + timestamp + ".png"
     fig.savefig(file_string)
     
-    web_string = "img/StockHistory-" + singleshelf.location + ".png"   
+    web_string = "img/StockHistory-" + singleshelf.location + timestamp + ".png"   
     singleshelf.salesimglocation = web_string
     
     plt.cla()

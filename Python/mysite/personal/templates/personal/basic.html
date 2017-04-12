@@ -12,15 +12,16 @@
         <tr class="bg-primary text-white" style="background-color:#008000">
 		{% endif %}
           <th scope="row">{{forloop.counter}}</th>
-          <td bgcolor="#FFFFFF"><img src="https://img.tesco.com/Groceries/pi/{{c.7}}/{{c.0}}/IDShot_540x540.jpg" class="responsive-img" style='max-height:100px;' alt="face"></td>
+          <td bgcolor="#FFFFFF"><center><img src="https://img.tesco.com/Groceries/pi/{{c.7}}/{{c.0}}/IDShot_540x540.jpg" class="responsive-img" style='max-height:90px;' alt="face"></center></td>
           <td >{{c.4}}</td>
           <td>{{c.1}}</td>
           <td>{{c.2}}</td>
-          <td bgcolor="#FFFFFF">
+          <td bgcolor="#FFFFFF"><center>
           {% load static %}
           <button type="button" class="btn" data-toggle="modal" data-target="#myModal">
-          <img id="imageresource" src="{% static ""%}{{c.3}}" data-img="{% static ""%}{{c.3}}" style='max-height:100px;' alt="face">
+          <img id="imageresource" src="{% static ""%}{{c.3}}" data-img="{% static ""%}{{c.3}}" style='max-height:90px;' alt="face">
           </button>
+          </center>
           </td>
         </tr>
     {% endfor%}

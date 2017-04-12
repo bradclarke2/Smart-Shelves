@@ -1,6 +1,7 @@
 import sqlite3
 
 dbName = "Database\\database.db"
+# dbName = "Database\\sales.db"
 
 def createDB():
     # Creates or opens a file called mydb with a SQLite3 DB
@@ -11,6 +12,5 @@ def createDB():
     
     cursor.execute('''
         CREATE TABLE shelfGridTable(id INTEGER PRIMARY KEY, shelfLocation TEXT, TPNB TEXT, 
-            unitsOfStock INTEGER, percentageFull REAL, timestamp TEXT, stockgraph TEXT, priorityscore INTEGER) ''')
+            stockgraph TEXT) ''')
     db.commit()
-    
