@@ -1,14 +1,21 @@
 import serial
-import time
 import random
 import sqlite3
+import time
+import datetime
 
 def readSerialUS(waiter, XYGridList, singleshelf, ser):
     while waiter == 1:
         while True:
             try:
+                ts = time.time()
+                timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+                print ("before read ",timestamp)
                 line = str(ser.readline(),'utf-8')
                 line = line.strip("\r\n")
+                ts = time.time()
+                timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+                print ("after read ",timestamp)
                   
                 if line.startswith("US:"):
                     line = line.strip( 'US:' )
@@ -56,7 +63,7 @@ def MeasureDistanceUS(singleshelf, XYGridList):
         try:
             ser = serial.Serial('COM9', 9600)
             ser.readline()
-            time.sleep(1)
+#             time.sleep(1)
             waiter = 1
             readSerialUS(waiter, XYGridList, singleshelf, ser) 
 #         except serial.serialutil.SerialException as err:
@@ -136,7 +143,7 @@ def MeasureDistancePR(singleshelf, XYGridList):
         try: 
             ser = serial.Serial('COM9', 9600)
             ser.readline()
-            time.sleep(1)
+#             time.sleep(1)
              
             waiter = 1
             readSerialPR(waiter, XYGridList, singleshelf, ser)

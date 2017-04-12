@@ -13,6 +13,10 @@ import time
 
 
 def MakeHeatMap(singleshelf, XYGridList):
+    ts = time.time()
+    timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+    print ("before heatmap ",timestamp)
+    
     shelfHeight = singleshelf.height
     shelfName = singleshelf.location
     

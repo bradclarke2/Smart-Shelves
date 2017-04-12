@@ -10,6 +10,8 @@ import CreateDB
 from Measurements.MeasureUS import MeasureDistancePR
 import threading
 import multiprocessing as mp
+import time
+import datetime
 
 def makingGraphs(singleshelf, XYGridList):                    
     heatmap.MakeHeatMap(singleshelf, XYGridList)                           
@@ -28,8 +30,14 @@ def startfunction():
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
             for singleshelf  in ShelfList:
+                ts = time.time()
+                timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+                print ("before measurement ", timestamp)
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                ts = time.time()
+                timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
+                print ("after measurement ", timestamp)
                 a = []
                 for b in XYGridList:
                     if b.shelflocation == singleshelf.location:
