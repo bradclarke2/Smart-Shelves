@@ -82,6 +82,6 @@ def printHistDB():
      
     print(a[0][0])
 
-#createDBHistTable()
-#createDBShelfs()
-#printHistDB()    
+# createDBHistTable()
+# createDBShelfs()
+# printHistDB()    

@@ -20,7 +20,7 @@ FilterOnePole lowPassFilterI( LOWPASS, filterFrequency );
 const int matrix [18][3] ={ //sensor,echo,trigger
   // 14L8E
   {0, 8, 9},
-  {1, 2, 3},
+  {1, 15, 14},
   {2, 48, 49},
   {3, 10, 11},
   {4, 4, 5},
@@ -89,15 +89,15 @@ void loop() {
   Serial.print(',');
   }
   
-  float a = lowPassFilterA.input (analogRead(A0)) ;  
-  float b = lowPassFilterB.input (analogRead(A1)) ;
-  float c = lowPassFilterC.input (analogRead(A2)) ;  
-  float d = lowPassFilterD.input (analogRead(A3)) ;  
+  float a = lowPassFilterA.input (analogRead(A2)) ;  
+  float b = lowPassFilterB.input (analogRead(A5)) ;
+  float c = lowPassFilterC.input (analogRead(A8)) ;  
+  float d = lowPassFilterD.input (analogRead(A1)) ;  
   float e = lowPassFilterE.input (analogRead(A4)) ;  
-  float f = lowPassFilterF.input (analogRead(A5)) ;  
-  float g = lowPassFilterG.input (analogRead(A6)) ;
-  float h = lowPassFilterH.input (analogRead(A7)) ;    
-  float i = lowPassFilterI.input (analogRead(A8)) ; 
+  float f = lowPassFilterF.input (analogRead(A7)) ;  
+  float g = lowPassFilterG.input (analogRead(A0)) ;
+  float h = lowPassFilterH.input (analogRead(A3)) ;    
+  float i = lowPassFilterI.input (analogRead(A6)) ; 
   
   Serial.print("PR:");
   Serial.print(a);Serial.print(",");

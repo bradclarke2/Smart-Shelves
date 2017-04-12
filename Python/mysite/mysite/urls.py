@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^webapp/', include('webapp.urls')),
     url(r'^graph/', include('graph.urls')),
     url(r'^gapscan/', include('gapscan.urls')),
+    url(r'^box/', include('box.urls')),
     url(r'^', include('personal.urls')),
 ]
