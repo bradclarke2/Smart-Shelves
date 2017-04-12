@@ -27,9 +27,6 @@ def startfunction():
             ProductList = ProductObject.makeProductGrid()
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
-            threads = []
-            t=[]
-            count = 0
             for singleshelf  in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
@@ -50,15 +47,6 @@ def startfunction():
                 makingGraphs(singleshelf, XYGridList)
                 putOnCore = mp.Process(target = makingGraphs, args = (singleshelf, XYGridList))
                 putOnCore.start()
-#                 threads.append(mp.Process(target = makingGraphs, args = (singleshelf, XYGridList)))
-#                 t.append(threads[count])
-#                 
-#                 count = count + 1
-#             for c in threads:
-#                 c.start()    
-#             #insertDB.printShelfDB()
-#             for x in threads:
-#                 x.join()
                 
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
@@ -112,13 +100,48 @@ def startfunction():
                 a.append(all_rows)
             print(a)
             my_list = [l[0] for l in a]
-            
             return my_list
         
+    class box_scan(Resource):
+        def get(self):
+            
+            ProductList = ProductObject.makeProductGrid()
+            XYGridList = XYGridObject.MakeXYGrid()
+            ShelfList = ShelfObject.makeShelfGrid()
+            numberOfBoxes = []
+            
+            for singleshelf in ShelfList:
+                measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
+                measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                a =[]
+                
+                for b in XYGridList:
+                    
+                    if b.shelflocation == singleshelf.location:
+                        c = stockpercentages.CalculateEmptyBoxes(singleshelf.height, b.USdistance, b.PRCovered)
+                        a.append(c)
+                        
+                count = 0
+                print ("a is ", a)
+                for d in a:
+                    if d == 1:
+                        count = count +1
+                
+                numberOfBoxes.append(count)
+            
+            numberOfShelvesWithBoxes = 0
+            for boxes in numberOfBoxes:
+                if boxes > 0:
+                    numberOfShelvesWithBoxes = numberOfShelvesWithBoxes +1    
+                    
+            
+            return numberOfShelvesWithBoxes     
+
 
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
     api.add_resource(photo_resistor, '/pr/')
     api.add_resource(stock_graph, '/stock/')
+    api.add_resource(box_scan, '/box/')
     
     app.run()

@@ -29,6 +29,15 @@ def CalculateConfidence(shelfHeight, measurementCM, lumens):
     else:
         return -1
     
+def CalculateEmptyBoxes(shelfHeight, measurementCM, lumens):
+    b = PRFullness(lumens)   
+    PercFull = (shelfHeight - measurementCM) / shelfHeight
+    print ("Percfull is", PercFull, " b is ", b, "measurement is", measurementCM)
+    if PercFull<= 0.1 and (b == 1 or b ==2):
+        return 1
+    else:
+        return 0
+    
 def UnitsToFill(singleshelf, ProductList, XYGridList,):
     for product in ProductList:
         if product.tpnb == singleshelf.tpnb:
