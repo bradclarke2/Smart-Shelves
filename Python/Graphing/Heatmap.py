@@ -8,6 +8,8 @@ import datetime
 import sqlite3
 import CreateDB
 from matplotlib import dates
+import os
+import time
 
 
 def MakeHeatMap(singleshelf, XYGridList):
@@ -54,7 +56,7 @@ def MakeHeatMap(singleshelf, XYGridList):
     ax.set_yticklabels(['Front','','','Back'])
     
     file_string = "mysite/personal/static/img/UltraSonic" + shelfName + timestamp + ".png"
-    fig.savefig(file_string)
+    fig.savefig(file_string, transparent=True)
     
     plt.cla()
     plt.close('all')
@@ -63,6 +65,19 @@ def MakeHeatMap(singleshelf, XYGridList):
     singleshelf.imglocation = web_string
     
 def MakeSalesGraph(singleshelf):
+    print("makingsalesgrapg")
+    
+    file_string = os.path.dirname("mysite/graph/static/img/StockHistory-"+singleshelf.location+".png") + "/StockHistory-"+singleshelf.location+".png"
+    #try:
+    #   print("trying")
+    #os.remove(file_string)
+    #print("success")
+    #except OSError:
+    #    print("fail")
+    #    pass
+    #time.sleep(5)
+    plt.clf()
+    
     db = sqlite3.connect(CreateDB.dbName)
     cursor = db.cursor()
     cursor.execute("SELECT * FROM shelfGridTable WHERE shelfLocation = (?)", (singleshelf.location,))
@@ -97,20 +112,28 @@ def MakeSalesGraph(singleshelf):
     ax.xaxis.set_major_locator(days)
     ax.xaxis.set_major_formatter(dayfmt)
      
-    ax.plot(x, y, '-', x, y, 'o')
+    lines = ax.plot(x, y, 'o', x, y, '-')
+    
+
     
     plt.setp(ax.xaxis.get_minorticklabels(), rotation=45)
     
     ax.xaxis.set_tick_params(which='major', pad=30)
+    lines.pop(0).remove()
     
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
     
-    file_string = "mysite/graph/static/img/StockHistory-" + singleshelf.location + timestamp + ".png"
-    fig.savefig(file_string)
-    
+    file_string2 = "mysite/graph/static/img/StockHistory-"+singleshelf.location+timestamp+".png"
     web_string = "img/StockHistory-" + singleshelf.location + timestamp + ".png"   
-    singleshelf.salesimglocation = web_string
+    singleshelf.salesimglocation = web_string   
+    fig.savefig(file_string2, transparent=True)
+    #plt.savefig(file_string2, transparent=True)
     
-    plt.cla()
-    plt.close('all')
+    # Creates or opens a file called mydb with a SQLite3 DB  
+
+    cursor.execute('''INSERT INTO shelfHistoricSales(shelfLocation, tpnb, stockgraph, timestamp)
+                      VALUES(?,?,?,?)''', (singleshelf.location, singleshelf.tpnb, web_string, timestamp))
+    db.commit()
+    
+    plt.clf()
