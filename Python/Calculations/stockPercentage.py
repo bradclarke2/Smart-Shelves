@@ -75,10 +75,10 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
             percentageFull = 1 - ( (sensorMeasurement - 4) /shelfHeight)
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
     averagePercentageFull =round((averagePercentageFullSum /9),2)
-#     if averagePercentageFull < 0:
-#         averagePercentageFull = 0
-#     if averagePercentageFull > 1:
-#         averagePercentageFull = 1
+    if averagePercentageFull < 0:
+        averagePercentageFull = 0
+    if averagePercentageFull > 1:
+        averagePercentageFull = 1
     return averagePercentageFull
 
 def ShelfAvailableVolume (singleShelf):

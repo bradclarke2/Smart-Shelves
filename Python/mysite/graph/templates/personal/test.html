@@ -3,8 +3,8 @@
 {% block content %}
 	{% for row in stock %}
 		<tr>
-          <td bgcolor="#FFFFFF"><img src="https://img.tesco.com/Groceries/pi/{{row.4}}/{{row.1}}/IDShot_540x540.jpg" class="responsive-img" style='max-height:150px;' alt="face"></td>
-          <td class="align-middle">{{row.3}}</td>
+          <td bgcolor="#FFFFFF"><img src="https://img.tesco.com/Groceries/pi/{{row.5}}/{{row.1}}/IDShot_540x540.jpg" class="responsive-img" style='max-height:150px;' alt="face"></td>
+          <td class="align-middle">{{row.4}}</td>
           <td>{{row.2}}</td>
           {% load static %}
           <td bgcolor="#FFFFFF"><img src="{% static ""%}{{row.0}}" class="responsive-img" style='max-height:150px;' alt="face"></td>
