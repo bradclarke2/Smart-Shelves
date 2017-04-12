@@ -84,4 +84,4 @@ def printHistDB():
 
 #createDBHistTable()
 #createDBShelfs()
-#printHistDB()    
+#printHistDB()
