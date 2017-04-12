@@ -100,24 +100,21 @@ def startfunction():
     
     class stock_graph(Resource):
         def get(self):
+            ShelfList = ShelfObject.makeShelfGrid()
+            a = []            
+            for shelf in ShelfList:
+                db = sqlite3.connect(CreateDB.dbName)
+                cursor = db.cursor()
+                cursor.execute('''SELECT stockgraph, tpnb, shelfLocation, max(timestamp) FROM shelfHistoricSales WHERE shelfLocation = (?)''', (shelf.location,))
+                all_rows = cursor.fetchall()
+                print(all_rows)
+                print(type(all_rows))
+                a.append(all_rows)
+            print(a)
+            my_list = [l[0] for l in a]
             
-            db = sqlite3.connect(CreateDB.dbName)
-            cursor = db.cursor()
-            
-            cursor.execute('''SELECT stockgraph, tpnb, shelfLocation, timestamp FROM shelfHistoricSales''')
-            all_rows = cursor.fetchall()
-            a = []
-            
-            for row in all_rows:
-                a.append([row[0], row[1], row[2]])
-                              
-            a = a[-12:]
-            c=[]
-            
-            for shelfLocation in a:
-                c.append([shelfLocation[0], shelfLocation[1], shelfLocation[2]])
-            
-            return c
+            return my_list
+        
 
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')

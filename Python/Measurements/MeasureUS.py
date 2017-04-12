@@ -76,28 +76,29 @@ def MeasureDistanceUS(singleshelf, XYGridList):
         percentfull = DBShelfFullness(singleshelf.location)
         shelfHeight = 45.0
         measureheight = shelfHeight * (1.0 - percentfull)
-        action = random.randint(0,10)
-        if action == 10:
+        action = random.randint(0,4)
+        if action == 4:
             #print("will refil")
-            stockchangecm = shelfHeight * 0.80
-        if action < 10:
+            base_stockchangecm = shelfHeight * 0.90
+        if action < 4:
             #print("stock gone")
-            variation = random.randint(-1,5)
-            variation = variation/100.0
-            stockchangecm = -shelfHeight * (0.15 + variation)
+            base_stockchangecm = -shelfHeight * 0.22
             #print("stockchangecm=", stockchangecm)
         
-        newreading = measureheight - stockchangecm
-        
-        if newreading > shelfHeight:
-            newreading = shelfHeight
-        if newreading < 4:
-            newreading = 4
-        
-        print("shelfloc=", singleshelf.location, "Fullness = ", percentfull, "Action = ", action, "measureheight=", measureheight, "stockchange = ", stockchangecm, "new=", newreading)    
-            
-        for XYGrid in XYGridList:
+        for XYGrid in XYGridList:   
             if XYGrid.shelflocation == singleshelf.location:
+                if action == 4:
+                    variation = random.uniform(0.9, 1.1)
+                if action < 4:
+                    variation = random.uniform(-0.5, 1.5)     
+                    print("var=",variation)      
+
+                newreading = measureheight - (base_stockchangecm * variation)
+                print("loc=", singleshelf.location, "Full = ", percentfull, "Action = ", action, "measheight=", measureheight, "stockchange = ", base_stockchangecm, "var=", variation, "new=", newreading) 
+                if newreading > shelfHeight:
+                    newreading = shelfHeight
+                if newreading < 4:
+                    newreading = 4
                 XYGrid.USdistance = newreading                
 
 #         if singleshelf.location == "6L1D":
