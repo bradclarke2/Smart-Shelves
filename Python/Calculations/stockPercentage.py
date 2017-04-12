@@ -1,8 +1,10 @@
 def USFullness(shelfHeight, measurementCM):
     if measurementCM > shelfHeight:
         PercFull = 0
+    if measurementCM < 0:
+        PercFull = 1
     else:
-        PercFull = (shelfHeight - measurementCM) / shelfHeight
+        PercFull = (shelfHeight - measurementCM - 4) / shelfHeight
         
     if (PercFull < 1/3):
         return 0
@@ -26,6 +28,15 @@ def CalculateConfidence(shelfHeight, measurementCM, lumens):
         return a
     else:
         return -1
+    
+def CalculateEmptyBoxes(shelfHeight, measurementCM, lumens):
+    b = PRFullness(lumens)   
+    PercFull = (shelfHeight - measurementCM) / shelfHeight
+    print ("Percfull is", PercFull, " b is ", b, "measurement is", measurementCM)
+    if PercFull<= 0.1 and (b == 1 or b ==2):
+        return 1
+    else:
+        return 0
     
 def UnitsToFill(singleshelf, ProductList, XYGridList,):
     for product in ProductList:
@@ -59,11 +70,15 @@ def ShelfAvgVolumePercentFull (shelfLocation, shelfHeight, XYGridList):
     for XYGrid in XYGridList:
         if (XYGrid.shelflocation == shelfLocation):
             sensorMeasurement = XYGrid.USdistance
-            percentageFull = 1 - ( (sensorMeasurement - 4) /shelfHeight)  
+            if sensorMeasurement > shelfHeight + 4:
+                sensorMeasurement = shelfHeight + 4
+            percentageFull = 1 - ( (sensorMeasurement - 4) /shelfHeight)
             averagePercentageFullSum = averagePercentageFullSum + percentageFull
     averagePercentageFull =round((averagePercentageFullSum /9),2)
-    if averagePercentageFull < 0.005 and averagePercentageFull > -0.05:
-        averagePercentageFull = 0
+#     if averagePercentageFull < 0:
+#         averagePercentageFull = 0
+#     if averagePercentageFull > 1:
+#         averagePercentageFull = 1
     return averagePercentageFull
 
 def ShelfAvailableVolume (singleShelf):
@@ -78,8 +93,6 @@ def ShelfOccupiedVolume (singleShelf):
     return OccupiedVolume
 
 def GetProductPriorty(singleshelf, ProductList):
-    
-
     for product in ProductList:
         if product.tpnb == singleshelf.tpnb:
             return product.priority

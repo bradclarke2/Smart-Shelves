@@ -56,6 +56,7 @@ def makeProductGrid():
         conn = http.client.HTTPSConnection('dev.tescolabs.com')
         conn.request("GET", "/product/?%s" % params, "{body}", headers)
         response = conn.getresponse()
+
         data = response.read()
         conn.close()
         parsed_data = json.loads(data)

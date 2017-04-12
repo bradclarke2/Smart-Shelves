@@ -27,9 +27,6 @@ def startfunction():
             ProductList = ProductObject.makeProductGrid()
             XYGridList = XYGridObject.MakeXYGrid()
             ShelfList = ShelfObject.makeShelfGrid()
-            threads = []
-            t=[]
-            count = 0
             for singleshelf  in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
@@ -50,15 +47,6 @@ def startfunction():
                 makingGraphs(singleshelf, XYGridList)
                 putOnCore = mp.Process(target = makingGraphs, args = (singleshelf, XYGridList))
                 putOnCore.start()
-#                 threads.append(mp.Process(target = makingGraphs, args = (singleshelf, XYGridList)))
-#                 t.append(threads[count])
-#                 
-#                 count = count + 1
-#             for c in threads:
-#                 c.start()    
-#             #insertDB.printShelfDB()
-#             for x in threads:
-#                 x.join()
                 
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
@@ -104,24 +92,61 @@ def startfunction():
             db = sqlite3.connect(CreateDB.dbName)
             cursor = db.cursor()
             
-            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp, stockgraph, priorityscore FROM shelfGridTable''')
+            cursor.execute('''SELECT stockgraph, tpnb, shelfLocation, timestamp FROM shelfHistoricSales''')
             all_rows = cursor.fetchall()
             a = []
             
             for row in all_rows:
-                a.append([row[1], row[2]])
+                a.append([row[0], row[1], row[2]])
                               
             a = a[-12:]
             c=[]
             
             for shelfLocation in a:
-                c.append(["img/StockHistory-" + shelfLocation[0] + ".png", shelfLocation[1], shelfLocation[0]])
+                c.append([shelfLocation[0], shelfLocation[1], shelfLocation[2]])
             
             return c
-
+        
+    class box_scan(Resource):
+        def get(self):
+            
+            ProductList = ProductObject.makeProductGrid()
+            XYGridList = XYGridObject.MakeXYGrid()
+            ShelfList = ShelfObject.makeShelfGrid()
+            numberOfBoxes = []
+            
+            for singleshelf in ShelfList:
+                measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
+                measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                a =[]
+                
+                for b in XYGridList:
+                    
+                    if b.shelflocation == singleshelf.location:
+                        c = stockpercentages.CalculateEmptyBoxes(singleshelf.height, b.USdistance, b.PRCovered)
+                        a.append(c)
+                        
+                count = 0
+                print ("a is ", a)
+                for d in a:
+                    if d == 1:
+                        count = count +1
+                
+                numberOfBoxes.append(count)
+            
+            numberOfShelvesWithBoxes = 0
+            for boxes in numberOfBoxes:
+                if boxes > 0:
+                    numberOfShelvesWithBoxes = numberOfShelvesWithBoxes +1    
+                    
+            
+            return numberOfShelvesWithBoxes     
+        
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
     api.add_resource(photo_resistor, '/pr/')
     api.add_resource(stock_graph, '/stock/')
+    api.add_resource(box_scan, '/box/')
+    
     
     app.run()
