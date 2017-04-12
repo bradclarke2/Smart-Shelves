@@ -1,7 +1,7 @@
 import serial
 import time
 import random
-import Calculations.stockPercentage as stockpercentages
+import sqlite3
 
 def readSerialUS(waiter, XYGridList, singleshelf, ser):
     while waiter == 1:
@@ -42,15 +42,21 @@ def readSerialPR(waiter, XYGridList, singleshelf, ser):
                 if ( XYGrid.shelflocation == singleshelf.location):
                     XYGrid.PRCovered = listData[XYGrid.idpos]
     
+def DBShelfFullness(location):
+    dbName = "Database\\database.db"
+    db = sqlite3.connect(dbName)
+    cursor = db.cursor()
+    cursor.execute("SELECT shelfLocation, max(timestamp), percentageFull FROM shelfGridTable WHERE shelfLocation = (?)", (location,))
+    all_rows = cursor.fetchall()
+    return all_rows[0][2]
+
 
 def MeasureDistanceUS(singleshelf, XYGridList):
-    
     if singleshelf.location == "1L4B":
         try:
             ser = serial.Serial('COM9', 9600)
             ser.readline()
             time.sleep(1)
-          
             waiter = 1
             readSerialUS(waiter, XYGridList, singleshelf, ser) 
 #         except serial.serialutil.SerialException as err:
@@ -66,38 +72,63 @@ def MeasureDistanceUS(singleshelf, XYGridList):
                 if ( XYGrid.shelflocation == singleshelf.location):
                     XYGrid.USdistance = 0 
         
-    else:   
-        fullness = random.randint(0,2)
+    else:
+        percentfull = DBShelfFullness(singleshelf.location)
+        shelfHeight = 45.0
+        measureheight = shelfHeight * (1.0 - percentfull)
+        action = random.randint(0,10)
+        if action == 10:
+            #print("will refil")
+            stockchangecm = shelfHeight * 0.80
+        if action < 10:
+            #print("stock gone")
+            variation = random.randint(-1,5)
+            variation = variation/100.0
+            stockchangecm = -shelfHeight * (0.15 + variation)
+            #print("stockchangecm=", stockchangecm)
         
-        if singleshelf.location == "6L1D":
-            fullness = 3
-        if singleshelf.location == "7L2B":
-            fullness = 4
+        newreading = measureheight - stockchangecm
         
+        if newreading > shelfHeight:
+            newreading = shelfHeight
+        if newreading < 4:
+            newreading = 4
         
-        for XYGrid in XYGridList:
+        print("shelfloc=", singleshelf.location, "Fullness = ", percentfull, "Action = ", action, "measureheight=", measureheight, "stockchange = ", stockchangecm, "new=", newreading)    
             
-            if fullness == 0:
-                range_min = 0.0
-                range_max = 18.0
-            if fullness == 1:
-                range_min = 13.0
-                range_max = 32.0
-            if fullness == 2:
-                range_min = 28.0
-                range_max = 55.0
-                
-            if fullness == 3:
-                range_min = 0.0
-                range_max = 14.0
-                
-            if fullness == 4:
-                range_min = 31.0
-                range_max = 45.0
-                   
-            if ( XYGrid.shelflocation == singleshelf.location):
-                rand = random.uniform(range_min, range_max)
-                XYGrid.USdistance = rand
+        for XYGrid in XYGridList:
+            if XYGrid.shelflocation == singleshelf.location:
+                XYGrid.USdistance = newreading                
+
+#         if singleshelf.location == "6L1D":
+#             fullness = 3
+#         if singleshelf.location == "7L2B":
+#             fullness = 4
+#         
+#         
+#         for XYGrid in XYGridList:
+#             
+#             if fullness == 0:
+#                 range_min = 0.0
+#                 range_max = 18.0
+#             if fullness == 1:
+#                 range_min = 13.0
+#                 range_max = 32.0
+#             if fullness == 2:
+#                 range_min = 28.0
+#                 range_max = 55.0
+#                 
+#             if fullness == 3:
+#                 range_min = 0.0
+#                 range_max = 14.0
+#                 
+#             if fullness == 4:
+#                 range_min = 31.0
+#                 range_max = 45.0
+#                    
+#             if ( XYGrid.shelflocation == singleshelf.location):
+#                 rand = random.uniform(range_min, range_max)
+#                 XYGrid.USdistance = rand
              
 def MeasureDistancePR(singleshelf, XYGridList):
     

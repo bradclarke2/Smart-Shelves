@@ -104,18 +104,18 @@ def startfunction():
             db = sqlite3.connect(CreateDB.dbName)
             cursor = db.cursor()
             
-            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp, stockgraph, priorityscore FROM shelfGridTable''')
+            cursor.execute('''SELECT stockgraph, tpnb, shelfLocation, timestamp FROM shelfHistoricSales''')
             all_rows = cursor.fetchall()
             a = []
             
             for row in all_rows:
-                a.append([row[1], row[2]])
+                a.append([row[0], row[1], row[2]])
                               
             a = a[-12:]
             c=[]
             
             for shelfLocation in a:
-                c.append(["img/StockHistory-" + shelfLocation[0] + ".png", shelfLocation[1], shelfLocation[0]])
+                c.append([shelfLocation[0], shelfLocation[1], shelfLocation[2]])
             
             return c
 
