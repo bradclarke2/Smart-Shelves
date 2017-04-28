@@ -10,6 +10,7 @@ import CreateDB
 from Measurements.MeasureUS import MeasureDistancePR
 import threading
 import multiprocessing as mp
+from Calculations import stockPercentage
 
 def makingGraphs(singleshelf, XYGridList):                    
     heatmap.MakeHeatMap(singleshelf, XYGridList)                           
@@ -30,6 +31,8 @@ def startfunction():
             for singleshelf  in ShelfList:
                 measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
                 measureUS.MeasureDistancePR(singleshelf, XYGridList)
+                stockPercentage.MeasureUSCovered(singleshelf, XYGridList)
+                stockPercentage.MeasurePRCovered(singleshelf, XYGridList)
                 a = []
                 for b in XYGridList:
                     if b.shelflocation == singleshelf.location:
@@ -51,27 +54,7 @@ def startfunction():
             prioritisedFillList = stockpercentages.calculateFillListOrder(ShelfList, ProductList)
             return prioritisedFillList
         
-    class gap_scan(Resource):
-        def get(self):
-            db = sqlite3.connect(CreateDB.dbName)
-            cursor = db.cursor()
-            
-            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp FROM shelfGridTable''')
-            all_rows = cursor.fetchall()
-            count = 0
-            a = []
-            for row in all_rows:
-                if count > (cursor.rowcount-7):
-                    a.append('{0}'.format(row[4])) 
-                count = count + 1
-                
-            a = a[-12:]
-            numberOfGaps= 0
-            for b in a:
-                if float(b) < 0.1:
-                    numberOfGaps = numberOfGaps + 1
-                    
-            return numberOfGaps                
+              
     
     class photo_resistor(Resource):
         def get(self):
@@ -104,44 +87,69 @@ def startfunction():
         
     class box_scan(Resource):
         def get(self):
+            db = sqlite3.connect(CreateDB.dbName)
+            cursor = db.cursor() 
+            cursor.execute('''SELECT shelfLocation, USpointscovered, PRpointscovered FROM shelfGridTable''')
+            all_rows = cursor.fetchall()
+            count = 0
+            ShelfsWithEmptyBox = 0
             
-            ProductList = ProductObject.makeProductGrid()
-            XYGridList = XYGridObject.MakeXYGrid()
-            ShelfList = ShelfObject.makeShelfGrid()
-            numberOfBoxes = []
-            
-            for singleshelf in ShelfList:
-                measureUS.MeasureDistanceUS(singleshelf, XYGridList) 
-                measureUS.MeasureDistancePR(singleshelf, XYGridList)
-                a =[]
+            USGridPoints = []
+            PRGridPoints = []
+            for row in all_rows:
+                USGridPoints.append(row[1])
+                PRGridPoints.append(row[2])
+                count = count + 1
+            print("all=",all_rows)    
+            print("initUS=",USGridPoints)
+            print("initpr=",PRGridPoints)
                 
-                for b in XYGridList:
-                    
-                    if b.shelflocation == singleshelf.location:
-                        c = stockpercentages.CalculateEmptyBoxes(singleshelf.height, b.USdistance, b.PRCovered)
-                        a.append(c)
-                        
-                count = 0
-                print ("a is ", a)
-                for d in a:
-                    if d == 1:
-                        count = count +1
+            USGridPoints = USGridPoints[-1:]
+            PRGridPoints = PRGridPoints[-1:]
+            
+            print("all=",all_rows)    
+            print("initUS=",USGridPoints)
+            print("initpr=",PRGridPoints)
                 
-                numberOfBoxes.append(count)
-            
-            numberOfShelvesWithBoxes = 0
-            for boxes in numberOfBoxes:
-                if boxes > 0:
-                    numberOfShelvesWithBoxes = numberOfShelvesWithBoxes +1    
-                    
-            
-            return numberOfShelvesWithBoxes     
+        
+            if USGridPoints[0] > PRGridPoints[0]:
+                ShelfsWithEmptyBox = ShelfsWithEmptyBox + 1
+                
+            return ShelfsWithEmptyBox      
 
+#             EmptyBoxShelves = 0
+#             for singleshelf in ShelfList:
+#                 for b in XYGridList:
+#                     if b.shelflocation == singleshelf.location:
+#                         c = stockpercentages.CalculateEmptyBoxes(singleshelf.height, b.USdistance, b.PRCovered)
+#                         if c == 1:
+#                             EmptyBoxGridPoints = EmptyBoxGridPoints + 1
+#                 if EmptyBoxGridPoints > 0:
+#                     EmptyBoxShelves = EmptyBoxShelves + 1
+#             return EmptyBoxShelves 
+        
+    class gap_scan(Resource):
+        def get(self):
+            db = sqlite3.connect(CreateDB.dbName)
+            cursor = db.cursor() 
+            cursor.execute('''SELECT id, shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp FROM shelfGridTable''')
+            all_rows = cursor.fetchall()
+            count = 0
+            a = []
+            for row in all_rows:
+                if count > (cursor.rowcount-7):
+                    a.append('{0}'.format(row[4])) 
+                count = count + 1
+            a = a[-1:]
+            numberOfGaps= 0
+            for b in a:
+                if float(b) < 0.1:
+                    numberOfGaps = numberOfGaps + 1
+            return numberOfGaps      
 
     api.add_resource(list_priority, '/list/')
     api.add_resource(gap_scan, '/gap/')
     api.add_resource(photo_resistor, '/pr/')
     api.add_resource(stock_graph, '/stock/')
     api.add_resource(box_scan, '/box/')
-    
     app.run()

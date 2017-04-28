@@ -92,7 +92,8 @@ def MakeSalesGraph(singleshelf):
     x_max = 0
     
     for a in range (0, i): 
-        x_reformated = datetime.datetime.strptime(all_rows[a][5], '%Y-%m-%d %H:%M:%S')
+        print(all_rows)
+        x_reformated = datetime.datetime.strptime(all_rows[a][7], '%Y-%m-%d %H:%M:%S')
         x.append(x_reformated)
         y.append(all_rows[a][3])
         if x_min == 0 or x_reformated < x_min:

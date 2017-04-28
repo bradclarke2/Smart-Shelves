@@ -76,21 +76,21 @@ def MeasureDistanceUS(singleshelf, XYGridList):
         percentfull = DBShelfFullness(singleshelf.location)
         shelfHeight = 45.0
         measureheight = shelfHeight * (1.0 - percentfull)
-        action = random.randint(0,4)
-        if action == 4:
+        action = random.randint(0,10)
+        if action == 10:
             #print("will refil")
             base_stockchangecm = shelfHeight * 0.90
-        if action < 4:
+        if action < 10:
             #print("stock gone")
-            base_stockchangecm = -shelfHeight * 0.22
+            base_stockchangecm = -shelfHeight * 0.10
             #print("stockchangecm=", stockchangecm)
         
         for XYGrid in XYGridList:   
             if XYGrid.shelflocation == singleshelf.location:
-                if action == 4:
+                if action == 10:
                     variation = random.uniform(0.9, 1.1)
-                if action < 4:
-                    variation = random.uniform(-0.5, 1.5)     
+                if action < 10:
+                    variation = random.uniform(-0.5, 3.5)     
                     print("var=",variation)      
 
                 newreading = measureheight - (base_stockchangecm * variation)
