@@ -1,10 +1,34 @@
+def MeasurePRCovered(singleshelf, XYGridList):
+    EmptyBoxGridPoints = 0
+    count = 0
+    for b in XYGridList:
+        if b.shelflocation == singleshelf.location:
+            count = count + 1
+            c = PRFullness(b.PRCovered)
+            if c == 1:
+                EmptyBoxGridPoints = EmptyBoxGridPoints + 1
+    singleshelf.PRpointscovered = EmptyBoxGridPoints
+
+def MeasureUSCovered(singleshelf, XYGridList):
+    EmptyBoxGridPoints = 0
+    count = 0
+    for b in XYGridList:
+        if b.shelflocation == singleshelf.location:
+            count = count + 1
+            c = USFullnessPerc(singleshelf.height, b.USdistance)
+            print(c)
+            if c < 0.06:
+                EmptyBoxGridPoints = EmptyBoxGridPoints + 1
+    singleshelf.USpointscovered = EmptyBoxGridPoints
+
+
 def USFullness(shelfHeight, measurementCM):
     if measurementCM > shelfHeight:
         PercFull = 0
     if measurementCM < 0:
         PercFull = 1
     else:
-        PercFull = (shelfHeight - measurementCM - 4) / shelfHeight
+        PercFull = (shelfHeight - measurementCM) / (shelfHeight - 6)
         
     if (PercFull < 1/3):
         return 0
@@ -12,11 +36,27 @@ def USFullness(shelfHeight, measurementCM):
         return 1
     else:
         return 2
+    
+    
+def USFullnessPerc(shelfHeight, measurementCM):
+    if measurementCM > shelfHeight:
+        PercFull = 0
+    if measurementCM < 0:
+        PercFull = 1
+    else:
+        PercFull = (shelfHeight - measurementCM) / (shelfHeight - 6)
+        
+    if PercFull > 1:
+        PercFull = 1
+    if PercFull < 0:
+        PercFull = 0
+        
+    return PercFull
+    
+    
 
 def PRFullness(lumens):
-    if (lumens > 450):
-        return 0
-    elif (lumens > 100 and lumens < 450):
+    if (lumens > 100):
         return 1
     else:
         return 2
@@ -58,7 +98,7 @@ def UnitsToFill(singleshelf, ProductList, XYGridList,):
     else:
         singleshelf.unitsOccupied = unitsOccupied
         
-    unitsOfSpace = int(availablevolume / productVolume)
+    unitsOfSpace = int( 0.77 * availablevolume / productVolume)
     if unitsOfSpace < 0:
         singleshelf.unitsOfSpace = 0
     else:

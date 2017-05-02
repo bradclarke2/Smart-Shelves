@@ -11,9 +11,11 @@ def insertShelfRecord(singleshelf):
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
      
+    print("US=", singleshelf.USpointscovered) 
+     
     # Insert row 
-    cursor.execute('''INSERT INTO shelfGridTable(shelfLocation, TPNB, unitsOfStock, percentageFull, timestamp, stockgraph, priorityscore)
-                      VALUES(?,?,?,?,?,?,?)''', (singleshelf.location, singleshelf.tpnb, singleshelf.unitsOccupied, singleshelf.volumePercentFull, timestamp, singleshelf.salesimglocation, singleshelf.priorityscore))
+    cursor.execute('''INSERT INTO shelfGridTable(shelfLocation, TPNB, unitsOfStock, percentageFull, USpointscovered, PRpointscovered, timestamp, stockgraph, priorityscore)
+                      VALUES(?,?,?,?,?,?,?,?,?)''', (singleshelf.location, singleshelf.tpnb, singleshelf.unitsOccupied, singleshelf.volumePercentFull, singleshelf.USpointscovered, singleshelf.PRpointscovered, timestamp, singleshelf.salesimglocation, singleshelf.priorityscore))
     db.commit()
 
 def printShelfDB():
