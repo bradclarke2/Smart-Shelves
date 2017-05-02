@@ -12,6 +12,7 @@ import os
 import time
 
 
+
 def MakeHeatMap(singleshelf, XYGridList):
     ts = time.time()
     timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d-%H-%M-%S')
@@ -59,7 +60,7 @@ def MakeHeatMap(singleshelf, XYGridList):
     ax.set_xticklabels(['Left','','','Right'])
     ax.set_yticklabels(['Front','','','Back'])
     
-    file_string = "mysite/personal/static/img/UltraSonic" + shelfName + timestamp + ".png"
+    file_string = os.path.dirname("mysite/personal/static/img/UltraSonic" + shelfName + timestamp + ".png")+"/UltraSonic" + shelfName + timestamp + ".png"
     fig.savefig(file_string, transparent=True)
     
     plt.cla()

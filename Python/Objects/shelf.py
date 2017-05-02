@@ -24,8 +24,8 @@ def makeShelfGrid():
     MadeList.append(Shelf("5L2C", 41, 50.0, 20.0, "5053947211041"))
     MadeList.append(Shelf("6L1D", 41, 50.0, 20.0, "5000462416734"))
     MadeList.append(Shelf("7L2B", 41, 50.0, 20.0, "5010024101381"))
-    MadeList.append(Shelf("8L2B", 41, 50.0, 20.0, "5012035936631"))
-    MadeList.append(Shelf("9L2B", 41, 50.0, 20.0, "5010204427379"))
-    MadeList.append(Shelf("10L2B", 41, 50.0, 20.0, "5000209114510"))
-    MadeList.append(Shelf("11L2B", 41, 50.0, 20.0, "5000436725589"))
+#     MadeList.append(Shelf("8L2B", 41, 50.0, 20.0, "5012035936631"))
+#     MadeList.append(Shelf("9L2B", 41, 50.0, 20.0, "5010204427379"))
+#     MadeList.append(Shelf("10L2B", 41, 50.0, 20.0, "5000209114510"))
+#     MadeList.append(Shelf("11L2B", 41, 50.0, 20.0, "5000436725589"))
     return MadeList

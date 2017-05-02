@@ -73,12 +73,11 @@ def startfunction():
                     a.append('{0}'.format(row[4])) 
                 count = count + 1
                 
-            a = a[-12:]
+            a = a[-(8):]
             numberOfGaps= 0
             for b in a:
                 if float(b) < 0.1:
                     numberOfGaps = numberOfGaps + 1
-                    
             return numberOfGaps                
     
     class photo_resistor(Resource):
@@ -125,7 +124,7 @@ def startfunction():
                 
                 for b in XYGridList:
                     
-                    if b.shelflocation == singleshelf.location:
+                    if b.shelflocation == "1L4B":
                         c = stockpercentages.CalculateEmptyBoxes(singleshelf.height, b.USdistance, b.PRCovered)
                         a.append(c)
                         
@@ -141,9 +140,8 @@ def startfunction():
             for boxes in numberOfBoxes:
                 if boxes > 0:
                     numberOfShelvesWithBoxes = numberOfShelvesWithBoxes +1    
-                    
-            
-            return numberOfShelvesWithBoxes     
+            numberOfShelvesWithBoxes = int(numberOfShelvesWithBoxes/8)
+            return numberOfShelvesWithBoxes
 
 
     api.add_resource(list_priority, '/list/')

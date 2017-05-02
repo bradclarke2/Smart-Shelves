@@ -37,7 +37,6 @@ def makeProductGrid():
     MadeList.append(Product("T. Eday Value Milk Choc Dgstvebiscuits 300G", "5010204427379", 30, 23, 8, 0.450, 3))
     MadeList.append(Product("Colgate Advancedwhite Toothpaste100ml", "5000209114510", 30, 23, 8, 0.450, 1))
     MadeList.append(Product("Tesco Shower Cleaner Spray 500Ml", "5000436725589", 30, 23, 8, 0.450, 1))
-    
 #     parser = SafeConfigParser()
 #     parser.read('keys.ini')
     APIkey = key.api
